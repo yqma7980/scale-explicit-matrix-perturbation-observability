@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0",
+  "classification": "DONE_M16_REGISTERED_OFFLINE_ROUTE_SPECIFIC_UNCERTAINTY_QUALIFICATION",
+  "failure_detail": "",
+  "direct_route_outcome": "DISTINGUISHABLE_FROM_ZERO",
+  "response_route_outcome": "DISTINGUISHABLE_FROM_ZERO",
+  "maximum_claim": "THE_DECLARED_ROUTE_SPECIFIC_ASSESSMENT_PROCEDURE_WAS_REPEATED_ON_A_SECOND_INDEPENDENTLY_FROZEN_COUPLED_FINITE_ELEMENT_TANGENT",
+  "guard_safety_or_harm_inference": "FORBIDDEN"
+}

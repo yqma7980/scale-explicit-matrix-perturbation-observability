@@ -1,0 +1,18 @@
+\begin{algorithm}[htbp]
+\caption{Scale-explicit uncertainty-qualified assessment of a tangent-only matrix perturbation.}
+\label{alg:assessment}
+\begin{algorithmic}[1]
+\Require $J$, $\Delta J$, $b$; solved-space declaration; $D_x$, $D_r$; a compatible norm; truth contract; response route; precision and uncertainty specification
+\Ensure Route-specific qualified response statement
+\State Declare the solved space, coordinates, norm, right-hand side, and perturbation route.
+\State Transform the operator, perturbation, right-hand side, and response coordinates consistently using $D_x$ and $D_r$.
+\State Evaluate the matrix-space amplitude $\mu_J$ in the declared coordinates.
+\State Evaluate available inverse-mediated quantities, including $\rho_1$ or $\rho_g$, without substituting them for a directional response.
+\State Evaluate the selected realized directional response $d_{\mathrm{obs}}$ by the declared arithmetic route.
+\State Declare the numerical truth contract for the operands and reference response.
+\State Construct the route-specific parent, arithmetic, and subtraction uncertainty components.
+\State Form the response interval $\bigl[\max(0,d_{\mathrm{obs}}-U),\,d_{\mathrm{obs}}+U\bigr]$.
+\State Test the sole distinguishability condition $d_{\mathrm{obs}}-U>0$.
+\State Report the matrix metric, operator metric, directional response, uncertainty qualification, and scope boundary.
+\end{algorithmic}
+\end{algorithm}

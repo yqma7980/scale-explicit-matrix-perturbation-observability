@@ -1,0 +1,233 @@
+{
+  "schema_version": "1.0",
+  "direct_components": [
+    {
+      "component": "PARENT_Z",
+      "space": "SOLUTION",
+      "actual_error": "0.00000000000003896088172994872534787669477953416790279124652174060337418203654707179292554599330762230564635173007",
+      "bound": "0.000000000001998316603294882697331652137073513941099371326188426640793086650775479534205191473887025838307758855",
+      "covered": "TRUE",
+      "status": "FINITE_RATIO",
+      "bound_to_actual_error_ratio": "51.29033313840026872822552120728548527930820782437180131945737258931800836749225365786016516956517802"
+    },
+    {
+      "component": "PARENT_ZG",
+      "space": "SOLUTION",
+      "actual_error": "0.00000000000002940137979011524915744363487612143050839013731419060881431674386052265450547523009887254440197265792",
+      "bound": "0.000000000001972463621003635515000999963369635620760590140208859215730963255097274497962785677864834539953672571",
+      "covered": "TRUE",
+      "status": "FINITE_RATIO",
+      "bound_to_actual_error_ratio": "67.08745083000418405934277065818114320316587339331109609865274624754933011866102668570457851728092662"
+    },
+    {
+      "component": "SUBTRACTION",
+      "space": "SOLUTION",
+      "actual_error": "0.0",
+      "bound": "0.00000000000000001968664442411224079925168347236519990952273468246818527252100080550963553906904869296397908073150567",
+      "covered": "TRUE",
+      "status": "EXACT_ZERO_ERROR_DENOMINATOR",
+      "bound_to_actual_error_ratio": ""
+    },
+    {
+      "component": "TOTAL_DIRECT_RESPONSE",
+      "space": "SOLUTION",
+      "actual_error": "0.00000000000004280167504363000675194949657562349327938096135887343292673741824228984188244213135752886114470267775",
+      "bound": "0.000000000003970799910942942324573451352126621927059870989131968324709322426873559541803516220800553342240512158",
+      "covered": "TRUE",
+      "status": "FINITE_RATIO",
+      "bound_to_actual_error_ratio": "92.77206807666513910953795584539211694561473193646120361395880610531788908038220534494794323202576977"
+    }
+  ],
+  "response_components": [
+    {
+      "component": "FORCING_ROUNDING",
+      "space": "RIGHT_HAND_SIDE",
+      "actual_error": "0.0",
+      "bound": "0.0",
+      "covered": "TRUE",
+      "status": "EXACT_ZERO_ERROR_DENOMINATOR",
+      "bound_to_actual_error_ratio": ""
+    },
+    {
+      "component": "PARENT_Z_PROPAGATION",
+      "space": "RIGHT_HAND_SIDE",
+      "actual_error": "0.0000000000000000000000000001384168574601173608154052444502261490654548713114756828239465724091125513181523605070648331375754838",
+      "bound": "0.000000000000000000000000007099446731099883924300016733871792741792359486611113939577985301722689592214946237501130491081933567",
+      "covered": "TRUE",
+      "status": "FINITE_RATIO",
+      "bound_to_actual_error_ratio": "51.29033313840026872822552120728548527930820782437180131945737258931800836749225365786016516956517801"
+    },
+    {
+      "component": "RESPONSE_SOLVE",
+      "space": "SOLUTION",
+      "actual_error": "0.00000000000000000000000001314897733036868847886812144296586291469189142034452248493688783220978637374764077468027429563393376",
+      "bound": "0.0000000000000000000000004963781817969057629693103945555487579252590699178538847648306411221536674972641507398272667592811359",
+      "covered": "TRUE",
+      "status": "FINITE_RATIO",
+      "bound_to_actual_error_ratio": "37.75032607672673298854234442595474727031893698572952685284992191281361877882222776327008210386759051"
+    },
+    {
+      "component": "TOTAL_RESPONSE_ROUTE",
+      "space": "SOLUTION",
+      "actual_error": "0.00000000000000000000001219355072305775511277185137221712565610628321616247847248064212283064634198569617613343820314282467",
+      "bound": "0.0000000000000000000069304826171673561801211534161663831658382676666413069558694185951345727480057886539594297019202223",
+      "covered": "TRUE",
+      "status": "FINITE_RATIO",
+      "bound_to_actual_error_ratio": "568.3728041629379741679916197446401845828893381856282517372257817332469096345923405884735002518412162"
+    }
+  ],
+  "reference_factorizations_per_precision": 2,
+  "reference_right_hand_sides_per_precision": 3,
+  "binary64_response_factorizations": 1,
+  "binary64_response_right_hand_sides": 1,
+  "cost": {
+    "schema_version": "1.0",
+    "elapsed_seconds": 19095.86064119998,
+    "peak_memory_bytes": 1452195840,
+    "approved_limits": {
+      "threads": 1,
+      "memory_bytes": 17179869184,
+      "precision_stage_seconds": 21600,
+      "total_seconds": 129600
+    },
+    "processes": {
+      "06_binary_reconstruction": {
+        "command": [
+          "python",
+          "scripts/m16/g2_11_high_precision_reference.py",
+          "--mode",
+          "audit",
+          "--output-root",
+          "generated/m16"
+        ],
+        "return_code": 0,
+        "wall_seconds": 3.017388900043443,
+        "peak_memory_bytes": 47136768,
+        "timed_out": false,
+        "memory_exceeded": false
+      },
+      "08_reference_120dps": {
+        "command": [
+          "python",
+          "scripts/m16/g2_11_high_precision_reference.py",
+          "--mode",
+          "reference",
+          "--output-root",
+          "generated/m16",
+          "--dps",
+          "120",
+          "--output",
+          "generated/m16/g2_11_reference_120dps.npz"
+        ],
+        "return_code": 0,
+        "wall_seconds": 9507.260476800031,
+        "peak_memory_bytes": 919359488,
+        "timed_out": false,
+        "memory_exceeded": false
+      },
+      "09_reference_180dps": {
+        "command": [
+          "python",
+          "scripts/m16/g2_11_high_precision_reference.py",
+          "--mode",
+          "reference",
+          "--output-root",
+          "generated/m16",
+          "--dps",
+          "180",
+          "--output",
+          "generated/m16/g2_11_reference_180dps.npz"
+        ],
+        "return_code": 0,
+        "wall_seconds": 9432.49720959994,
+        "peak_memory_bytes": 1221980160,
+        "timed_out": false,
+        "memory_exceeded": false
+      },
+      "10_reference_agreement": {
+        "command": [
+          "python",
+          "scripts/m16/g2_11_uncertainty_evaluator.py",
+          "--mode",
+          "reference-audit",
+          "--output-root",
+          "generated/m16",
+          "--ref120",
+          "generated/m16/g2_11_reference_120dps.npz",
+          "--ref180",
+          "generated/m16/g2_11_reference_180dps.npz"
+        ],
+        "return_code": 0,
+        "wall_seconds": 59.677034799940884,
+        "peak_memory_bytes": 1452195840,
+        "timed_out": false,
+        "memory_exceeded": false
+      },
+      "14_direct_parent_solves": {
+        "command": [
+          "python",
+          "scripts/m16/g2_11_binary64_response.py",
+          "--mode",
+          "direct",
+          "--output-root",
+          "generated/m16"
+        ],
+        "return_code": 0,
+        "wall_seconds": 1.5192375999176875,
+        "peak_memory_bytes": 50515968,
+        "timed_out": false,
+        "memory_exceeded": false
+      },
+      "16_direct_uncertainty": {
+        "command": [
+          "python",
+          "scripts/m16/g2_11_uncertainty_evaluator.py",
+          "--mode",
+          "direct",
+          "--output-root",
+          "generated/m16",
+          "--ref180",
+          "generated/m16/g2_11_reference_180dps.npz"
+        ],
+        "return_code": 0,
+        "wall_seconds": 35.04751019994728,
+        "peak_memory_bytes": 1057341440,
+        "timed_out": false,
+        "memory_exceeded": false
+      },
+      "19_response_route": {
+        "command": [
+          "python",
+          "scripts/m16/g2_11_binary64_response.py",
+          "--mode",
+          "response",
+          "--output-root",
+          "generated/m16"
+        ],
+        "return_code": 0,
+        "wall_seconds": 2.0163222000701353,
+        "peak_memory_bytes": 74264576,
+        "timed_out": false,
+        "memory_exceeded": false
+      },
+      "20_response_uncertainty": {
+        "command": [
+          "python",
+          "scripts/m16/g2_11_uncertainty_evaluator.py",
+          "--mode",
+          "response",
+          "--output-root",
+          "generated/m16",
+          "--ref180",
+          "generated/m16/g2_11_reference_180dps.npz"
+        ],
+        "return_code": 0,
+        "wall_seconds": 51.59552289999556,
+        "peak_memory_bytes": 1077493760,
+        "timed_out": false,
+        "memory_exceeded": false
+      }
+    }
+  },
+  "tightness_is_acceptance_gate": false
+}

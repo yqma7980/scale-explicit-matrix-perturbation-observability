@@ -1,0 +1,86 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=22mm]{geometry}
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+\setmainfont{Times New Roman}
+\setsansfont{Times New Roman}
+\setmonofont{Courier New}
+\usepackage{amsmath,mathtools,unicode-math}
+\setmathfont{STIX Two Math}
+\usepackage{graphicx,booktabs,tabularx,xltabular,array,ragged2e}
+\usepackage{caption,float,placeins,needspace,setspace,microtype}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={Supplementary Material: Scale-Explicit and Uncertainty-Qualified Assessment of Tangent-Only Matrix Perturbations in Coupled Finite-Element Linearizations}}
+\renewcommand{\tabularxcolumn}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+\renewcommand{\arraystretch}{1.14}
+\captionsetup{font=small,labelfont=bf,skip=5pt}
+\setlength{\parindent}{1.5em}
+\setlength{\parskip}{0.08em}
+\setlength{\emergencystretch}{2em}
+\setstretch{1.04}
+\title{\bfseries Supplementary Material\\[0.4em]\large Scale-Explicit and Uncertainty-Qualified Assessment of Tangent-Only Matrix Perturbations in Coupled Finite-Element Linearizations}
+\author{Bing Liang \and Yangqi Ma \and Weiji Sun\thanks{Corresponding author: sunweiji-1231@163.com} \and Shi He}
+\date{}
+
+\begin{document}
+\maketitle
+\renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\thefigure}{S\arabic{figure}}
+
+\section*{Purpose and scope}
+This supplement preserves exact numerical values, uncertainty components, precision and identity checks, tooling provenance, and the complete claim--evidence matrix supporting the main manuscript. M8 and M16 are independent frozen finite-element linearizations rather than a mesh or refinement sequence. The material below documents the existing calculations; no new scientific case was executed for the public-release v0.6 revision.
+
+\section{Synthetic analytical verification}
+\begin{table}[htbp]\centering\small
+\caption{Pre-specified reproduction of the P2 directional construction.}\label{tab:S1}
+\input{S1_P2_registered_reproduction.tex}
+\end{table}
+
+\begin{table}[htbp]\centering\small
+\caption{Pre-specified P3 coordinate-transformation and redeclaration calculation.}\label{tab:S2}
+\input{S2_P3_scaling_audit.tex}
+\end{table}
+
+\section{Frozen operand provenance}
+\input{S3_operand_provenance.tex}
+
+The M8 and M16 matrix snapshots were each reproduced bitwise by an independent capture witness. Each offline application reconstructed every declared binary64 operand exactly before high-precision comparison. The perturbation identity $J_g=J+\Delta J$ was checked elementwise before either response route was classified.
+
+\section{Exact route-specific results}
+\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\input{S4_exact_two_operator_values.tex}
+\normalsize
+
+\section{Precision, residual, identity, and repeatability evidence}
+\footnotesize
+\setlength{\tabcolsep}{3.2pt}
+\input{S5_precision_residual_repeatability.tex}
+\normalsize
+
+The reference precision ladder used 120 and 180 decimal digits for each application. M8 consumed exactly 467.59207850007806~s with recorded peak memory of 115154944 bytes. M16 consumed exactly 37512.160941799986~s with recorded peak memory of 1452195840 bytes. These values document two offline applications; they are not a complexity fit or an online-estimator benchmark.
+
+\section{Route-specific uncertainty components}
+\footnotesize
+\setlength{\tabcolsep}{3.2pt}
+\input{S6_uncertainty_components.tex}
+\normalsize
+
+All declared uncertainty components covered their independently evaluated reference errors in the two frozen applications. Coverage is route- and case-specific and does not certify either arithmetic route for other operators.
+
+\section{Tooling-attempt provenance}
+An initial G2-11 attempt terminated before scientific evaluation because a NumPy Boolean value could not be serialized to JSON. That failed attempt was retained. The only correction converted one NumPy Boolean result to the built-in Python Boolean type. The complete execution then restarted from its first row rather than continuing from the stopping point. Neither attempt invoked Abaqus, a user element, finite-element assembly, a Newton replay, or a new mesh.
+
+\section{Complete claim--evidence matrix}
+The CSV file \texttt{Paper2\_claim\_evidence\_matrix\_v0.4.csv} is the authoritative record. Table~\ref{tab:S7} is a typeset presentation view retained in portrait orientation.
+
+\scriptsize
+\setlength{\tabcolsep}{2.1pt}
+\input{S7_claim_evidence_matrix.tex}
+\normalsize
+
+\section*{Data and code availability}
+The non-confidential reproducibility artifact is archived in Zenodo at \href{https://doi.org/10.5281/zenodo.21833851}{https://doi.org/10.5281/zenodo.21833851}. The public source repository is \href{https://github.com/yqma7980/scale-explicit-matrix-perturbation-observability}{https://github.com/yqma7980/scale-explicit-matrix-perturbation-observability}. The release excludes Abaqus executables, user-element source, solver state histories, and engineering project data.
+
+\end{document}

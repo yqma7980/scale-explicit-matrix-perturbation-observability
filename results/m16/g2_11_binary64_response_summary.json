@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "route": "INDEPENDENT_RESPONSE_EQUATION",
+  "python": "3.12.10",
+  "numpy": "2.4.3",
+  "scipy": "1.17.1",
+  "solver": "scipy.linalg.solve",
+  "assume_a": "gen",
+  "forcing_order": "ROW_MAJOR_SEQUENTIAL_MULTIPLY_ADD_NO_FMA",
+  "dimension": 900,
+  "delta_j_nonzero_count": 900,
+  "delta_j_off_diagonal_nonzero_count": 0,
+  "delta_j_diagonal_nonzero_count": 900,
+  "delta_j_diagonal_bitwise_uniform": true,
+  "delta_j_sha256": "F3B7ACE8626714A327F8A19D6310899A4D7BC97459E4DCCCFD9D4827860AC451",
+  "rhs_sha256": "F96BAE4A3CA2A286BB5BB087F87887813A6C61521C70E8651904385934BECC44",
+  "response_sha256": "91FD84BEAD79C881E2E6FE0DA4AB473C12A729357C5E398AA80B1B6C27F06946",
+  "finite": true,
+  "serialized_before_reference_comparison": true
+}

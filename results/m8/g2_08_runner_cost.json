@@ -1,0 +1,112 @@
+{
+  "schema_version": "1.0",
+  "total_elapsed_seconds": 467.59207850007806,
+  "peak_memory_bytes": 115154944,
+  "steps": {
+    "01_input_sha": {
+      "wall_seconds": 0.5203997999196872,
+      "peak_memory_bytes": 29130752,
+      "return_code": 0
+    },
+    "03_snapshot_schema": {
+      "wall_seconds": 0.5130556999938563,
+      "peak_memory_bytes": 30449664,
+      "return_code": 0
+    },
+    "04_snapshot_repeatability": {
+      "wall_seconds": 0.514406600035727,
+      "peak_memory_bytes": 32194560,
+      "return_code": 0
+    },
+    "05_history": {
+      "wall_seconds": 0.5131856999360025,
+      "peak_memory_bytes": 30400512,
+      "return_code": 0
+    },
+    "07_binary_reconstruction": {
+      "wall_seconds": 0.7643600999144837,
+      "peak_memory_bytes": 34017280,
+      "return_code": 0
+    },
+    "08_reference_120dps": {
+      "wall_seconds": 108.9918853000272,
+      "peak_memory_bytes": 102436864,
+      "return_code": 0
+    },
+    "08_reference_180dps": {
+      "wall_seconds": 107.23107840004377,
+      "peak_memory_bytes": 115154944,
+      "return_code": 0
+    },
+    "08_reference_audit": {
+      "wall_seconds": 2.518964200047776,
+      "peak_memory_bytes": 94457856,
+      "return_code": 0
+    },
+    "12_direct_route": {
+      "wall_seconds": 2.7684350999770686,
+      "peak_memory_bytes": 54771712,
+      "return_code": 0
+    },
+    "14_direct_uncertainty": {
+      "wall_seconds": 2.018444800050929,
+      "peak_memory_bytes": 81858560,
+      "return_code": 0
+    },
+    "17_response_route": {
+      "wall_seconds": 1.013699600007385,
+      "peak_memory_bytes": 53387264,
+      "return_code": 0
+    },
+    "18_response_uncertainty": {
+      "wall_seconds": 3.0234648999758065,
+      "peak_memory_bytes": 78397440,
+      "return_code": 0
+    },
+    "19_finalize_routes": {
+      "wall_seconds": 0.5109908999875188,
+      "peak_memory_bytes": 27525120,
+      "return_code": 0
+    },
+    "22_repeat_reference_120dps": {
+      "wall_seconds": 107.77417640003841,
+      "peak_memory_bytes": 102547456,
+      "return_code": 0
+    },
+    "22_repeat_reference_180dps": {
+      "wall_seconds": 113.99343619996216,
+      "peak_memory_bytes": 114954240,
+      "return_code": 0
+    },
+    "22_repeat_reference_audit": {
+      "wall_seconds": 2.78150080004707,
+      "peak_memory_bytes": 93057024,
+      "return_code": 0
+    },
+    "22_repeat_direct": {
+      "wall_seconds": 1.0150054999394342,
+      "peak_memory_bytes": 53362688,
+      "return_code": 0
+    },
+    "22_repeat_direct_uncertainty": {
+      "wall_seconds": 2.265963100013323,
+      "peak_memory_bytes": 78553088,
+      "return_code": 0
+    },
+    "22_repeat_response": {
+      "wall_seconds": 1.0145416000159457,
+      "peak_memory_bytes": 54333440,
+      "return_code": 0
+    },
+    "22_repeat_response_uncertainty": {
+      "wall_seconds": 2.7672403999604285,
+      "peak_memory_bytes": 76894208,
+      "return_code": 0
+    },
+    "22_repeat_finalize": {
+      "wall_seconds": 0.5139838999602944,
+      "peak_memory_bytes": 30789632,
+      "return_code": 0
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "release": "1.0.0",
+  "doi": "10.5281/zenodo.21833851",
+  "checks": {
+    "author_order_exact": true,
+    "corresponding_email_exact": true,
+    "doi_exact": true,
+    "funding_exact": true,
+    "M8_operands_binary64.npz_schema_exact": true,
+    "M16_operands_binary64.npz_schema_exact": true,
+    "binary64_smoke_pass": true,
+    "main_pdf_pages": 32,
+    "supplement_pdf_pages": 9,
+    "generated_directory_absent": true,
+    "absolute_path_hits": [],
+    "placeholder_hits": [],
+    "forbidden_files": [],
+    "json_count": 34,
+    "csv_count": 15,
+    "python_count": 10,
+    "main_latex_clean": true,
+    "supplement_latex_clean": true,
+    "supplement_overfull_warning_count": 2,
+    "frozen_v0_5_hashes": {
+      "Paper2_CMAME_manuscript_v0.5.tex": "AC1A855D569AF3B1094842D711D410CC951BC03D6408C375B1522030BD5ED940",
+      "Paper2_CMAME_supplement_v0.5.tex": "7EDB185D0906E68477CC68FFCA9DD76F30EE405CBAA0BC52DCC61E110634E3B5",
+      "Paper2_CMAME_references_v0.5.bib": "4C48DA77F75DC81343C07FA81776B88B1B16278594C2C9A07DFB9BA209F870DE"
+    }
+  },
+  "errors": [],
+  "pass": true
+}

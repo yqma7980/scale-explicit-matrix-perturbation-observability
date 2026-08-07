@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "reference_120dps_normalized_difference": "0",
+  "reference_180dps_normalized_difference": "0",
+  "reference_limit": "1E-80",
+  "binary_npz_bitwise_exact": {
+    "direct": true,
+    "response": true
+  },
+  "distinguishability_decisions_exact": true,
+  "subprocess_return_codes": {
+    "22_repeat_reference_120dps": 0,
+    "22_repeat_reference_180dps": 0,
+    "22_repeat_reference_audit": 0,
+    "22_repeat_direct": 0,
+    "22_repeat_direct_uncertainty": 0,
+    "22_repeat_response": 0,
+    "22_repeat_response_uncertainty": 0,
+    "22_repeat_finalize": 0
+  },
+  "pass": true
+}

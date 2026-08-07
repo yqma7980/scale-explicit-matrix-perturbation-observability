@@ -1,0 +1,304 @@
+{
+  "schema_version": "1.0",
+  "elapsed_seconds": 37512.16094530001,
+  "peak_memory_bytes": 1452195840,
+  "approved_limits": {
+    "threads": 1,
+    "memory_bytes": 17179869184,
+    "precision_stage_seconds": 21600,
+    "total_seconds": 129600
+  },
+  "processes": {
+    "06_binary_reconstruction": {
+      "command": [
+        "python",
+        "scripts/m16/g2_11_high_precision_reference.py",
+        "--mode",
+        "audit",
+        "--output-root",
+        "generated/m16"
+      ],
+      "return_code": 0,
+      "wall_seconds": 3.017388900043443,
+      "peak_memory_bytes": 47136768,
+      "timed_out": false,
+      "memory_exceeded": false
+    },
+    "08_reference_120dps": {
+      "command": [
+        "python",
+        "scripts/m16/g2_11_high_precision_reference.py",
+        "--mode",
+        "reference",
+        "--output-root",
+        "generated/m16",
+        "--dps",
+        "120",
+        "--output",
+        "generated/m16/g2_11_reference_120dps.npz"
+      ],
+      "return_code": 0,
+      "wall_seconds": 9507.260476800031,
+      "peak_memory_bytes": 919359488,
+      "timed_out": false,
+      "memory_exceeded": false
+    },
+    "09_reference_180dps": {
+      "command": [
+        "python",
+        "scripts/m16/g2_11_high_precision_reference.py",
+        "--mode",
+        "reference",
+        "--output-root",
+        "generated/m16",
+        "--dps",
+        "180",
+        "--output",
+        "generated/m16/g2_11_reference_180dps.npz"
+      ],
+      "return_code": 0,
+      "wall_seconds": 9432.49720959994,
+      "peak_memory_bytes": 1221980160,
+      "timed_out": false,
+      "memory_exceeded": false
+    },
+    "10_reference_agreement": {
+      "command": [
+        "python",
+        "scripts/m16/g2_11_uncertainty_evaluator.py",
+        "--mode",
+        "reference-audit",
+        "--output-root",
+        "generated/m16",
+        "--ref120",
+        "generated/m16/g2_11_reference_120dps.npz",
+        "--ref180",
+        "generated/m16/g2_11_reference_180dps.npz"
+      ],
+      "return_code": 0,
+      "wall_seconds": 59.677034799940884,
+      "peak_memory_bytes": 1452195840,
+      "timed_out": false,
+      "memory_exceeded": false
+    },
+    "14_direct_parent_solves": {
+      "command": [
+        "python",
+        "scripts/m16/g2_11_binary64_response.py",
+        "--mode",
+        "direct",
+        "--output-root",
+        "generated/m16"
+      ],
+      "return_code": 0,
+      "wall_seconds": 1.5192375999176875,
+      "peak_memory_bytes": 50515968,
+      "timed_out": false,
+      "memory_exceeded": false
+    },
+    "16_direct_uncertainty": {
+      "command": [
+        "python",
+        "scripts/m16/g2_11_uncertainty_evaluator.py",
+        "--mode",
+        "direct",
+        "--output-root",
+        "generated/m16",
+        "--ref180",
+        "generated/m16/g2_11_reference_180dps.npz"
+      ],
+      "return_code": 0,
+      "wall_seconds": 35.04751019994728,
+      "peak_memory_bytes": 1057341440,
+      "timed_out": false,
+      "memory_exceeded": false
+    },
+    "19_response_route": {
+      "command": [
+        "python",
+        "scripts/m16/g2_11_binary64_response.py",
+        "--mode",
+        "response",
+        "--output-root",
+        "generated/m16"
+      ],
+      "return_code": 0,
+      "wall_seconds": 2.0163222000701353,
+      "peak_memory_bytes": 74264576,
+      "timed_out": false,
+      "memory_exceeded": false
+    },
+    "20_response_uncertainty": {
+      "command": [
+        "python",
+        "scripts/m16/g2_11_uncertainty_evaluator.py",
+        "--mode",
+        "response",
+        "--output-root",
+        "generated/m16",
+        "--ref180",
+        "generated/m16/g2_11_reference_180dps.npz"
+      ],
+      "return_code": 0,
+      "wall_seconds": 51.59552289999556,
+      "peak_memory_bytes": 1077493760,
+      "timed_out": false,
+      "memory_exceeded": false
+    },
+    "23_route_decisions": {
+      "command": [
+        "python",
+        "scripts/m16/g2_11_uncertainty_evaluator.py",
+        "--mode",
+        "finalize",
+        "--output-root",
+        "generated/m16",
+        "--cost-json",
+        "generated/m16/g2_11_runner_cost.json"
+      ],
+      "return_code": 0,
+      "wall_seconds": 0.5147601999342442,
+      "peak_memory_bytes": 2560000,
+      "timed_out": false,
+      "memory_exceeded": false
+    },
+    "26_repeat_reference_120dps": {
+      "command": [
+        "python",
+        "scripts/m16/g2_11_high_precision_reference.py",
+        "--mode",
+        "reference",
+        "--output-root",
+        "generated/m16/repeatability_run2",
+        "--dps",
+        "120",
+        "--output",
+        "generated/m16/repeatability_run2/g2_11_reference_120dps.npz"
+      ],
+      "return_code": 0,
+      "wall_seconds": 9449.298485400039,
+      "peak_memory_bytes": 918605824,
+      "timed_out": false,
+      "memory_exceeded": false
+    },
+    "26_repeat_reference_180dps": {
+      "command": [
+        "python",
+        "scripts/m16/g2_11_high_precision_reference.py",
+        "--mode",
+        "reference",
+        "--output-root",
+        "generated/m16/repeatability_run2",
+        "--dps",
+        "180",
+        "--output",
+        "generated/m16/repeatability_run2/g2_11_reference_180dps.npz"
+      ],
+      "return_code": 0,
+      "wall_seconds": 8834.103557899944,
+      "peak_memory_bytes": 1139273728,
+      "timed_out": false,
+      "memory_exceeded": false
+    },
+    "26_repeat_reference_audit": {
+      "command": [
+        "python",
+        "scripts/m16/g2_11_uncertainty_evaluator.py",
+        "--mode",
+        "reference-audit",
+        "--output-root",
+        "generated/m16/repeatability_run2",
+        "--ref120",
+        "generated/m16/repeatability_run2/g2_11_reference_120dps.npz",
+        "--ref180",
+        "generated/m16/repeatability_run2/g2_11_reference_180dps.npz"
+      ],
+      "return_code": 0,
+      "wall_seconds": 49.13705219991971,
+      "peak_memory_bytes": 1411661824,
+      "timed_out": false,
+      "memory_exceeded": false
+    },
+    "26_repeat_direct": {
+      "command": [
+        "python",
+        "scripts/m16/g2_11_binary64_response.py",
+        "--mode",
+        "direct",
+        "--output-root",
+        "generated/m16/repeatability_run2"
+      ],
+      "return_code": 0,
+      "wall_seconds": 3.516589400009252,
+      "peak_memory_bytes": 56213504,
+      "timed_out": false,
+      "memory_exceeded": false
+    },
+    "26_repeat_direct_uncertainty": {
+      "command": [
+        "python",
+        "scripts/m16/g2_11_uncertainty_evaluator.py",
+        "--mode",
+        "direct",
+        "--output-root",
+        "generated/m16/repeatability_run2",
+        "--ref180",
+        "generated/m16/repeatability_run2/g2_11_reference_180dps.npz"
+      ],
+      "return_code": 0,
+      "wall_seconds": 31.042279899935238,
+      "peak_memory_bytes": 1030848512,
+      "timed_out": false,
+      "memory_exceeded": false
+    },
+    "26_repeat_response": {
+      "command": [
+        "python",
+        "scripts/m16/g2_11_binary64_response.py",
+        "--mode",
+        "response",
+        "--output-root",
+        "generated/m16/repeatability_run2"
+      ],
+      "return_code": 0,
+      "wall_seconds": 2.0153759999666363,
+      "peak_memory_bytes": 73940992,
+      "timed_out": false,
+      "memory_exceeded": false
+    },
+    "26_repeat_response_uncertainty": {
+      "command": [
+        "python",
+        "scripts/m16/g2_11_uncertainty_evaluator.py",
+        "--mode",
+        "response",
+        "--output-root",
+        "generated/m16/repeatability_run2",
+        "--ref180",
+        "generated/m16/repeatability_run2/g2_11_reference_180dps.npz"
+      ],
+      "return_code": 0,
+      "wall_seconds": 45.052950700046495,
+      "peak_memory_bytes": 1042653184,
+      "timed_out": false,
+      "memory_exceeded": false
+    },
+    "26_repeat_finalize": {
+      "command": [
+        "python",
+        "scripts/m16/g2_11_uncertainty_evaluator.py",
+        "--mode",
+        "finalize",
+        "--output-root",
+        "generated/m16/repeatability_run2",
+        "--cost-json",
+        "generated/m16/g2_11_runner_cost.json"
+      ],
+      "return_code": 0,
+      "wall_seconds": 0.5140327999833971,
+      "peak_memory_bytes": 2555904,
+      "timed_out": false,
+      "memory_exceeded": false
+    }
+  }
+}

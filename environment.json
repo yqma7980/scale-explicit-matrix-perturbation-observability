@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "recorded_python": "3.12.10",
+  "packages": {
+    "numpy": "2.4.3",
+    "scipy": "1.17.1",
+    "mpmath": "1.3.0"
+  },
+  "threading": {
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1"
+  },
+  "execution_scope": "offline linear-system analysis; no Abaqus execution"
+}

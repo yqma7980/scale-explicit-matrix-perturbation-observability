@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.1",
+  "cases": [
+    "M8",
+    "M16"
+  ],
+  "keys": [
+    "jhat_phys",
+    "jhat_reg",
+    "rhs_hat",
+    "z_phys",
+    "z_reg",
+    "free_dofs",
+    "row_scale",
+    "x_scale"
+  ],
+  "array_rows": 16,
+  "state_history_arrays_excluded": [
+    "trial_state",
+    "committed_state",
+    "committed_svars",
+    "residual"
+  ],
+  "solution_vectors_included": [
+    "z_phys",
+    "z_reg"
+  ],
+  "purpose": "Non-confidential frozen dimensionless linear-system operands and registered solution vectors only"
+}

@@ -1,0 +1,16 @@
+{
+  "p2": {
+    "rows": 12,
+    "metric_pair_relative_difference_max": 0.0,
+    "eta_a_relative_error_max": 8.721173782511926e-102,
+    "eta_b_absolute_max": 0.0,
+    "precision_digits": 100
+  },
+  "p3": {
+    "rows": 8,
+    "transformed_operator_relative_difference_max": 7.490674676829096e-102,
+    "transformed_response_relative_spread": 0.0,
+    "redeclared_differs_for_all_s_gt_1": true,
+    "precision_digits": 100
+  }
+}

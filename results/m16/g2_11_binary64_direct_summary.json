@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "route": "DIRECT_PARENT_SOLUTION_DIFFERENCE",
+  "python": "3.12.10",
+  "numpy": "2.4.3",
+  "scipy": "1.17.1",
+  "solver": "scipy.linalg.solve",
+  "assume_a": "gen",
+  "factorizations": 2,
+  "right_hand_sides": 2,
+  "dimension": 900,
+  "response_norm_binary64": 2.4633764407707218e-11,
+  "parent_norm_binary64": 0.08866076450434204,
+  "eta_binary64": 2.77842905431983e-10,
+  "delta_sha256": "6DCD3B122A7BF9CDA8EC991B766303A919DFAF942AED1D151457BAD9116E61FD",
+  "finite": true,
+  "serialized_before_reference_comparison": true
+}

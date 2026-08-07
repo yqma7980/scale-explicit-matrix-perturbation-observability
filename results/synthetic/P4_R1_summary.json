@@ -1,0 +1,75 @@
+{
+  "schema_version": "1.0",
+  "final_status": "DONE_P4_R1_TWO_TRUTH_UNCERTAINTY_MODEL_VALIDATED_ON_FROZEN_AND_HOLDOUT",
+  "all_registered_gates_pass": true,
+  "development": {
+    "rows": 300,
+    "source_coverage_count": 300,
+    "binary_coverage_count": 300,
+    "source_severe_count": 0,
+    "binary_severe_count": 0,
+    "component_failure_count": 0,
+    "subtraction_failure_count": 0,
+    "nonfinite_count": 0,
+    "maximum_reference_relative_residual": "6.15236029869614753170882916397730867400586658E-105",
+    "source_labels": {
+      "OBSERVABLE": 183,
+      "RESOLUTION_LIMITED": 63,
+      "TRANSITION": 54
+    },
+    "binary_labels": {
+      "OBSERVABLE": 189,
+      "RESOLUTION_LIMITED": 53,
+      "TRANSITION": 58
+    }
+  },
+  "holdout": {
+    "rows": 300,
+    "source_coverage_count": 300,
+    "binary_coverage_count": 300,
+    "source_severe_count": 0,
+    "binary_severe_count": 0,
+    "component_failure_count": 0,
+    "subtraction_failure_count": 0,
+    "nonfinite_count": 0,
+    "maximum_reference_relative_residual": "0.0",
+    "source_labels": {
+      "OBSERVABLE": 145,
+      "RESOLUTION_LIMITED": 98,
+      "TRANSITION": 57
+    },
+    "binary_labels": {
+      "OBSERVABLE": 150,
+      "RESOLUTION_LIMITED": 91,
+      "TRANSITION": 59
+    }
+  },
+  "legacy": {
+    "schema_version": "1.0",
+    "key_set_exact": true,
+    "exact_row_count": 300,
+    "expected_row_count": 300,
+    "failures": [],
+    "historical_coverage_count": 287,
+    "historical_severe_undercoverage_count": 3
+  },
+  "repeatability": {
+    "development_results": true,
+    "development_summary": true,
+    "holdout_results": true,
+    "holdout_summary": true
+  },
+  "process_audit": {
+    "pass": true,
+    "forbidden_solver_processes": [],
+    "license_manager_observed": true
+  },
+  "wp27_historical_labels": "diagnostic_only",
+  "paper1_modified": false,
+  "abaqus_run": false,
+  "manuscript_body_written": false,
+  "ready_for_separate_g2_04_integration": true,
+  "validated_scope": "SOURCE_AND_BINARY_ERROR_COVERAGE_ONLY",
+  "tightness_qualified": false,
+  "tightness_diagnostic_role": "POST_EXECUTION_NON_GATE"
+}

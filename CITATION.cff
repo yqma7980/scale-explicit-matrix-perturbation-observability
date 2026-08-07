@@ -1,0 +1,34 @@
+cff-version: 1.2.0
+message: "If you use this artifact, please cite the archived release."
+title: "Scale-explicit matrix-perturbation observability: reproducibility artifact"
+type: software
+version: 1.0.0
+date-released: 2026-08-07
+doi: 10.5281/zenodo.21833851
+authors:
+  - family-names: Liang
+    given-names: Bing
+    affiliation: "School of Mechanics and Engineering, Liaoning Technical University"
+  - family-names: Ma
+    given-names: Yangqi
+    affiliation: "School of Mechanics and Engineering, Liaoning Technical University"
+  - family-names: Sun
+    given-names: Weiji
+    affiliation: "School of Mechanics and Engineering, Liaoning Technical University"
+    email: "sunweiji-1231@163.com"
+  - family-names: He
+    given-names: Shi
+    affiliation: "China Coal Research Institute"
+repository-code: "https://github.com/yqma7980/scale-explicit-matrix-perturbation-observability"
+url: "https://doi.org/10.5281/zenodo.21833851"
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.21833851
+    description: Archived release DOI
+license: MIT
+keywords:
+  - matrix perturbation
+  - finite elements
+  - numerical observability
+  - uncertainty qualification
+  - coordinate scaling

@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "route": "DIRECT_PARENT_SOLUTION_DIFFERENCE",
+  "dimension": 196,
+  "response_norm_binary64": 2.918501453675816e-12,
+  "parent_norm_binary64": 0.03943130360975877,
+  "eta_binary64": 7.401483558746767e-11,
+  "delta_sha256": "4D73BD8973F399A020FD0ADB877760C6C907B7CB28F53E1FA437B86FA60D0F47",
+  "finite": true,
+  "serialized_before_reference_comparison": true
+}

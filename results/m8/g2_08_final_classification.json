@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "classification": "DONE_M8_INDEPENDENT_PRECISION_AND_UNCERTAINTY_QUALIFICATION",
+  "first_failed_row": null,
+  "direct_route_zero_decision": "DISTINGUISHABLE_FROM_ZERO",
+  "response_route_zero_decision": "DISTINGUISHABLE_FROM_ZERO",
+  "registered_rows_passed": 24,
+  "registered_rows_total": 24,
+  "done": true,
+  "guard_safety_or_harm_classification": "NOT_AUTHORIZED"
+}

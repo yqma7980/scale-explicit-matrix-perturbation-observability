@@ -1,0 +1,151 @@
+{
+  "schema_version": "1.0",
+  "direct_components": [
+    {
+      "component": "PARENT_Z",
+      "space": "SOLUTION",
+      "actual_error": "0.000000000000008982265570557587330773030947618118508577669882842149533995818117717710846294214442357564777737929926",
+      "bound": "0.0000000000003226016562676377291832930729419859852938628308420601477443639054955629477059647754299784885800860621",
+      "covered": "TRUE",
+      "status": "FINITE_RATIO",
+      "bound_to_actual_error_ratio": "35.91539948730459964005715954713340660571445691902595555489731107629910005606928362177248803322515971"
+    },
+    {
+      "component": "PARENT_ZG",
+      "space": "SOLUTION",
+      "actual_error": "0.000000000000008877751912471859527566842248818694646071077346289124424409614310870775845120860722929759342793029145",
+      "bound": "0.0000000000002654033664645770837841684095747019844356589723578280133643990225258788469947115176298525210742069229",
+      "covered": "TRUE",
+      "status": "FINITE_RATIO",
+      "bound_to_actual_error_ratio": "29.89533488672134062987403970924420187857166490827823972671314254236069655351965983241045512894259096"
+    },
+    {
+      "component": "SUBTRACTION",
+      "space": "SOLUTION",
+      "actual_error": "0.0",
+      "bound": "0.000000000000000008755508231403353310095668932022987078368263531757629703980824904649976733759262055858025981910067742",
+      "covered": "TRUE",
+      "status": "EXACT_ZERO_ERROR_DENOMINATOR",
+      "bound_to_actual_error_ratio": ""
+    },
+    {
+      "component": "TOTAL_DIRECT_RESPONSE",
+      "space": "SOLUTION",
+      "actual_error": "0.00000000000001016387846857356584632190690927204634126068085257334235575761215085634397794505682864385236710317844",
+      "bound": "0.0000000000005880137782404462163207715781856199927166001714634199187384669088463464446774100523218868676802748951",
+      "covered": "TRUE",
+      "status": "FINITE_RATIO",
+      "bound_to_actual_error_ratio": "57.85328701622798140592688042037248754889265166529548069662376214189385025391065863098648571081844995"
+    }
+  ],
+  "response_components": [
+    {
+      "component": "FORCING_ROUNDING",
+      "space": "RIGHT_HAND_SIDE",
+      "actual_error": "0.0",
+      "bound": "0.0",
+      "covered": "TRUE",
+      "status": "EXACT_ZERO_ERROR_DENOMINATOR",
+      "bound_to_actual_error_ratio": ""
+    },
+    {
+      "component": "PARENT_Z_PROPAGATION",
+      "space": "RIGHT_HAND_SIDE",
+      "actual_error": "0.00000000000000000000000000003191141775913872653366720636689322002360452004709454433138595461271944076846627937398737905190390736",
+      "bound": "0.000000000000000000000000001146111317025733914872251776777950685804309326137442851292163600957831262782224170244583975560054732",
+      "covered": "TRUE",
+      "status": "FINITE_RATIO",
+      "bound_to_actual_error_ratio": "35.91539948730459964005715954713340660571445691902595555489731107629910005606928362177248803322515971"
+    },
+    {
+      "component": "RESPONSE_SOLVE",
+      "space": "SOLUTION",
+      "actual_error": "0.000000000000000000000000001274870781163624350699286151282165629261904926882821091523064210000357812807489635995150561583755374",
+      "bound": "0.00000000000000000000000001807358043462780398103109875444254296972554098749643641300306491032825528954547138169219700320866423",
+      "covered": "TRUE",
+      "status": "FINITE_RATIO",
+      "bound_to_actual_error_ratio": "14.17679399486380986295737278875177421037615266553286607280447061139182747833877117003904917890140827"
+    },
+    {
+      "component": "TOTAL_RESPONSE_ROUTE",
+      "space": "SOLUTION",
+      "actual_error": "0.0000000000000000000000009828615132538012364816828537658692569826602170536747836483763887205993729406288927742694094587917885",
+      "bound": "0.0000000000000000000002588299567178916551202655296880895539935734612342619760039891099523264193484210461160608761377537887",
+      "covered": "TRUE",
+      "status": "FINITE_RATIO",
+      "bound_to_actual_error_ratio": "263.3432617185558772377900914769749222000180730920744163896957837963448048067937582507864306752651597"
+    }
+  ],
+  "reference_factorizations_per_precision": 2,
+  "reference_right_hand_sides_per_precision": 3,
+  "binary64_response_factorizations": 1,
+  "binary64_response_right_hand_sides": 1,
+  "cost": {
+    "schema_version": "1.0",
+    "elapsed_seconds_before_repeatability": 230.65217050001957,
+    "peak_memory_bytes": 115154944,
+    "steps": {
+      "01_input_sha": {
+        "wall_seconds": 0.5203997999196872,
+        "peak_memory_bytes": 29130752,
+        "return_code": 0
+      },
+      "03_snapshot_schema": {
+        "wall_seconds": 0.5130556999938563,
+        "peak_memory_bytes": 30449664,
+        "return_code": 0
+      },
+      "04_snapshot_repeatability": {
+        "wall_seconds": 0.514406600035727,
+        "peak_memory_bytes": 32194560,
+        "return_code": 0
+      },
+      "05_history": {
+        "wall_seconds": 0.5131856999360025,
+        "peak_memory_bytes": 30400512,
+        "return_code": 0
+      },
+      "07_binary_reconstruction": {
+        "wall_seconds": 0.7643600999144837,
+        "peak_memory_bytes": 34017280,
+        "return_code": 0
+      },
+      "08_reference_120dps": {
+        "wall_seconds": 108.9918853000272,
+        "peak_memory_bytes": 102436864,
+        "return_code": 0
+      },
+      "08_reference_180dps": {
+        "wall_seconds": 107.23107840004377,
+        "peak_memory_bytes": 115154944,
+        "return_code": 0
+      },
+      "08_reference_audit": {
+        "wall_seconds": 2.518964200047776,
+        "peak_memory_bytes": 94457856,
+        "return_code": 0
+      },
+      "12_direct_route": {
+        "wall_seconds": 2.7684350999770686,
+        "peak_memory_bytes": 54771712,
+        "return_code": 0
+      },
+      "14_direct_uncertainty": {
+        "wall_seconds": 2.018444800050929,
+        "peak_memory_bytes": 81858560,
+        "return_code": 0
+      },
+      "17_response_route": {
+        "wall_seconds": 1.013699600007385,
+        "peak_memory_bytes": 53387264,
+        "return_code": 0
+      },
+      "18_response_uncertainty": {
+        "wall_seconds": 3.0234648999758065,
+        "peak_memory_bytes": 78397440,
+        "return_code": 0
+      }
+    }
+  },
+  "tightness_is_acceptance_gate": false
+}

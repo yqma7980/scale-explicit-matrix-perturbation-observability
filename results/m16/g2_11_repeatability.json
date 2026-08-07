@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0",
+  "reference_120_normalized_difference": "0",
+  "reference_180_normalized_difference": "0",
+  "reference_limit": "1E-80",
+  "direct_binary_npz_exact": true,
+  "response_binary_npz_exact": true,
+  "decisions_exact": true,
+  "pass": true
+}

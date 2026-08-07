@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "files": [
+    {
+      "path": "results/m16/g2_11_runner_cost.json",
+      "source_sha256": "0B619DD32DE2727515FCA45CF54A6359810856D5FF84EC8F559854430DEF343A",
+      "public_sha256": "D4A545AE1CA648C27AFCCEDA72F60F171A43D77A865FDCDEF37549ECD481E689",
+      "replacement_count": 65,
+      "absolute_paths_remaining": false
+    },
+    {
+      "path": "results/m16/g2_11_tightness_and_cost.json",
+      "source_sha256": "5BC3803919DD7EBD4C041C50B97443CCDE7F65962E2835DD00CA9D83168C5415",
+      "public_sha256": "801DD9B799E63A93EE67F4EEE7BF5ED9B720CA08281D2FD790A93D02CA35163B",
+      "replacement_count": 30,
+      "absolute_paths_remaining": false
+    }
+  ],
+  "pass": true
+}
