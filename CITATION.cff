@@ -4,7 +4,7 @@ title: "Route-specific finite-precision qualification of tangent perturbations: 
 type: software
 version: 1.1.0
 date-released: 2026-08-10
-doi: 10.5281/zenodo.21833850
+doi: 10.5281/zenodo.21870862
 authors:
   - family-names: Liang
     given-names: Bing
@@ -20,11 +20,11 @@ authors:
     given-names: Shi
     affiliation: "China Coal Research Institute"
 repository-code: "https://github.com/yqma7980/scale-explicit-matrix-perturbation-observability"
-url: "https://doi.org/10.5281/zenodo.21833850"
+url: "https://doi.org/10.5281/zenodo.21870862"
 identifiers:
   - type: doi
-    value: 10.5281/zenodo.21833850
-    description: Concept DOI representing all archived versions
+    value: 10.5281/zenodo.21870862
+    description: Version DOI for the v1.1.0 archived release
 license: MIT
 keywords:
   - matrix perturbation

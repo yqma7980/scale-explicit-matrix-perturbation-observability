@@ -209,12 +209,9 @@ D.~Goldberg, What every computer scientist should know about floating-point
   {\path{doi:10.1145/103162.103163}}.
 
 \bibitem{liang2026artifact}
-B.~Liang, Y.~Ma, W.~Sun, S.~He,
-  \href{https://doi.org/10.5281/zenodo.21833850}{Route-specific
-  finite-precision qualification of tangent perturbations: reproducibility
-  artifact}, software and data (2026).
-\newblock \href {https://doi.org/10.5281/zenodo.21833850}
-  {\path{doi:10.5281/zenodo.21833850}}.
-\newline\urlprefix\url{https://doi.org/10.5281/zenodo.21833850}
+B.~Liang, Y.~Ma, W.~Sun, S.~He, Route-specific finite-precision qualification
+  of tangent perturbations: reproducibility artifact, software and data (2026).
+\newblock \href {https://doi.org/10.5281/zenodo.21870862}
+  {\path{doi:10.5281/zenodo.21870862}}.
 
 \end{thebibliography}

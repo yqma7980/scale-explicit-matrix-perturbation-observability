@@ -84,7 +84,7 @@ ill-posed; the corrected run was a preregistered tooling-only rerun from row 1.
 
 Liang, B., Ma, Y., Sun, W., and He, S. (2026). *Route-specific
 finite-precision qualification of tangent perturbations: reproducibility
-artifact* (Version 1.1.0). Zenodo. https://doi.org/10.5281/zenodo.21833850
+artifact* (Version 1.1.0). Zenodo. https://doi.org/10.5281/zenodo.21870862
 
 ## Licenses
 
