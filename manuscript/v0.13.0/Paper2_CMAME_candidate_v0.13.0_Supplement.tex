@@ -1,0 +1,255 @@
+\documentclass[11pt]{article}
+\usepackage[letterpaper,margin=22mm]{geometry}
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+\setmainfont{Times New Roman}
+\setsansfont{Times New Roman}
+\setmonofont{Courier New}
+\usepackage{amsmath,mathtools,unicode-math}
+\setmathfont{STIX Two Math}
+\usepackage{graphicx,booktabs,tabularx,xltabular,array,ragged2e}
+\graphicspath{{figures/}{supplement_figures/}}
+\usepackage{caption,float,placeins,needspace,setspace,microtype}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={Supplementary Material: Coordinate-Explicit and Route-Specific Finite-Precision Qualification of Tangent-Only Perturbations}}
+\renewcommand{\tabularxcolumn}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+\renewcommand{\arraystretch}{1.14}
+\captionsetup{font=small,labelfont=bf,skip=5pt}
+\setlength{\parindent}{1.5em}
+\setlength{\parskip}{0.08em}
+\setlength{\emergencystretch}{2em}
+\setstretch{1.04}
+\title{\bfseries Supplementary Material\\[0.4em]\large Coordinate-Explicit and Route-Specific Finite-Precision Qualification of Tangent-Only Perturbations in Coupled Finite-Element Linearizations}
+\author{Bing Liang \and Yangqi Ma \and Weiji Sun\thanks{Corresponding author: sunweiji-1231@163.com} \and Shi He}
+\date{Computer Methods in Applied Mechanics and Engineering candidate v0.13.0}
+
+\begin{document}
+\maketitle
+\renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\thefigure}{S\arabic{figure}}
+
+\section*{Purpose, version, and scope}
+This supplement accompanies manuscript v0.13.0. It preserves the registered
+analytical checks, exact finite-element operand provenance, route-specific
+finite-precision error components, response-route validation, independent
+precision audit, effectivity anatomy, tooling lineage, and claim boundaries.
+The M8 and M16 cases are independent fixed finite-element linearizations, not a
+mesh sequence. G2-20 added synthetic response-route evaluation and a newly
+generated holdout, but it did not execute Abaqus, modify a finite-element
+operator, or import the scalable sparse-estimator results reserved for Paper 3.
+
+\section{Analytical verification}
+\begin{table}[htbp]\centering\small
+\caption{Registered reproduction of the directional non-determination construction}\label{tab:S1}
+\input{S1_P2_registered_reproduction.tex}
+\end{table}
+
+\begin{table}[htbp]\centering\small
+\caption{Registered coordinate-transformation and redeclaration calculation}\label{tab:S2}
+\input{S2_P3_scaling_audit.tex}
+\end{table}
+
+\begin{table}[htbp]\centering\small
+\caption{Historical reproduction and direct-route coverage for the two reference problems}\label{tab:S3}
+\input{T2_registered_coverage.tex}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.94\linewidth,height=0.65\textheight,keepaspectratio]{S1_historical_undercoverage_attribution.pdf}
+\caption{Source-representation attribution for the three historical severe-undercoverage cases. This retained diagnostic does not assign a perturbation defect}\label{fig:S1}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.78\linewidth,height=0.58\textheight,keepaspectratio]{S2_historical_response_label_bins.pdf}
+\caption{Historical descriptive response bins retained for provenance only. The labels have no validated class boundary and are excluded from confirmatory conclusions}\label{fig:S2}
+\end{figure}
+
+\section{Response-route theorem validation}
+For the response equation
+\[
+  A\delta z=-Ez,\qquad A=J+E,
+\]
+the computed route uses
+\[
+  \widetilde f=\operatorname{fl}(-E\widetilde z),\qquad
+  r_\delta=\widetilde f-A\widetilde{\delta z},\qquad
+  q_f=\widetilde f+E\widetilde z.
+\]
+With majorants
+$\beta_A\geq\lVert A^{-1}\rVert_2$,
+$\alpha_E\geq\lVert E\rVert_2$, and
+$\lVert\widetilde z-z\rVert_2\leq U_z$, the implemented bound is
+\[
+ U_{\rm r}
+ =
+ \beta_A\alpha_EU_z
+ +\beta_A\lVert q_f\rVert_2
+ +\beta_A\lVert r_\delta\rVert_2.
+\]
+The development design was reused only after this route model was fixed. A new
+300-system holdout then used disjoint seeds and registered condition,
+dimension, perturbation-amplitude, and family grids.
+
+\begin{table}[htbp]\centering\footnotesize
+\caption{Direct- and response-route coverage and lower-quantity counts}\label{tab:S4}
+\input{T4_response_route_validation_v0.13.0.tex}
+\end{table}
+
+All 2,400 route--contract--split coverage decisions passed: 300/300 for both
+routes in both reference contracts on development and on the new holdout.
+The response equation had lower decimal-source reference error in 295/300
+development and 271/300 new-holdout systems. Binary64 counts were 199/300 and
+160/300. These data do not establish a universal route ranking.
+
+\section{Precision and implementation independence}
+The registered high-precision implementation was repeated at 120 and 180
+decimal digits. The maximum normalized difference was
+$5.16\times10^{-110}$ on development and $6.82\times10^{-107}$ on the new
+holdout, with no coverage-decision change. A separately implemented
+Python \texttt{Decimal} backend evaluated 36 stratified holdout systems in
+both reference contracts. Across 72 lane comparisons, the maximum normalized
+difference from the registered reference was $6.96\times10^{-153}$.
+
+The first G2-20 execution stopped because its precision comparator normalized
+near-zero quantities by their own magnitude. That attempt remains classified
+as an inconclusive reference-or-precision result. Two tooling-only corrections
+replaced the comparator without changing operators, thresholds, response
+formulas, or scientific outputs; the corrected run restarted from row 1. This
+lineage is reported rather than overwritten.
+
+\section{Effectivity anatomy and extreme ratios}
+For positive reference error $e_{\rm ref}$ and response magnitude
+$d_{\rm ref}$, define
+\[
+ I_{\rm eff}=\frac{U}{e_{\rm ref}},
+ \qquad
+ R_U=\frac{U}{d_{\rm ref}}.
+\]
+For a parent bound $U=\lVert A^{-1}\rVert_F\lVert r\rVert_2$ and exact
+forward error $e=\lVert A^{-1}r\rVert_2$,
+\[
+ I_{\rm eff}
+ =
+ \underbrace{\frac{\lVert A^{-1}\rVert_F}
+ {\lVert A^{-1}\rVert_2}}_{\text{norm-majorant inflation}}
+ \underbrace{\frac{\lVert A^{-1}\rVert_2\lVert r\rVert_2}
+ {\lVert A^{-1}r\rVert_2}}_{\text{directional inflation}}.
+\]
+
+\begin{table}[htbp]\centering\footnotesize
+\caption{Factorized direct-route effectivity anatomy}\label{tab:S5}
+\input{T3_effectivity_anatomy_v0.13.0.tex}
+\end{table}
+
+The norm-majorant median was approximately $1.0001$ on development and
+$1.0050$ on the original holdout. Directional-inflation medians instead
+ranged from $1.36\times10^3$ to $2.31\times10^4$. Thus the central
+conservativeness is associated primarily with replacing the realized residual
+direction by a worst-direction inverse norm.
+
+The largest finite direct-route effectivity was
+$7.9321\times10^{86}$, reported in the manuscript as
+$\log_{10}I_{\rm eff}=86.90$. It occurred for
+\texttt{HOLDOUT\_SPD\_D16\_C01\_E3eM17}, whose reference error was
+approximately $4.9995\times10^{-102}$. The extreme ratio is therefore a
+near-zero-denominator event, not undercoverage. Exact strings and case
+identifiers remain in \texttt{Paper2\_extreme\_ratio\_record.json}.
+
+A registered main-effects analysis gave adjusted $R^2=0.869$ on development;
+the drop-one partial $R^2$ for condition exponent was $0.855$. The original
+holdout fit gave adjusted $R^2=0.057$ and condition partial $R^2=0.029$.
+These finite-grid results support mechanism analysis within the registered
+design, not a universal conditioning law.
+
+\section{Frozen finite-element operand provenance}
+\input{S3_operand_provenance.tex}
+
+The M8 and M16 matrix snapshots were reproduced bitwise by independent capture
+witnesses. Each application reconstructed every declared binary64 operand
+exactly before high-precision comparison. The identity $A=J+E$ was checked
+elementwise before either response route was evaluated.
+
+\section{Finite-element route results}
+\begin{table}[htbp]\centering\footnotesize
+\caption{Rounded finite-element route values; exact decimal strings remain in the machine-readable decision files}\label{tab:S6}
+\input{T3_two_operator_route_qualification.tex}
+\end{table}
+
+\section{Finite-element precision, residual, identity, and repeatability}
+\begin{table}[htbp]\centering\footnotesize
+\caption{Rounded precision and identity checks; all gates passed}\label{tab:S7}
+\begin{tabularx}{\linewidth}{>{\centering\arraybackslash}p{0.09\linewidth} *{4}{>{\centering\arraybackslash}X}}
+\toprule
+Case & 120/180 difference & Maximum residual & Route-identity difference & Repeat difference \\
+\midrule
+M8 & $8.81\times10^{-121}$ & $2.55\times10^{-124}$ & $9.18\times10^{-123}$ & $0$ \\
+M16 & $3.97\times10^{-121}$ & $4.14\times10^{-124}$ & $3.04\times10^{-122}$ & $0$ \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+M8 required 468~s and 0.11~GiB recorded peak memory. M16 required 10.4~h and
+1.35~GiB. These are offline reference costs for two fixed applications; they
+are not a sparse-complexity fit or an online-estimator benchmark.
+
+\section{Finite-element route-specific error components}
+\begin{table}[htbp]\centering\footnotesize
+\caption{Component-level coverage and final route enclosure}\label{tab:S8}
+\begin{tabularx}{\linewidth}{>{\centering\arraybackslash}p{0.09\linewidth} >{\RaggedRight\arraybackslash}p{0.19\linewidth} X >{\centering\arraybackslash}p{0.16\linewidth} >{\centering\arraybackslash}p{0.12\linewidth}}
+\toprule
+Case & Route & Registered components & Final $U$ & Coverage \\
+\midrule
+M8 & Direct difference & two parent solves; subtraction & $5.880\times10^{-13}$ & 3/3 \\
+M8 & Response equation & parent propagation; forcing; response solve & $2.588\times10^{-22}$ & 3/3 \\
+M16 & Direct difference & two parent solves; subtraction & $3.971\times10^{-12}$ & 3/3 \\
+M16 & Response equation & parent propagation; forcing; response solve & $6.930\times10^{-21}$ & 3/3 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+All registered components covered their independently evaluated reference
+errors for the two fixed applications. Coverage is operation-graph and case
+specific; exact component strings remain in the archived ledgers.
+
+\section{Historical diagnostics retained for provenance}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.94\linewidth,height=0.68\textheight,keepaspectratio]{supplement_figures/F6_coverage_and_tightness.pdf}
+\caption{Historical coverage and aggregate conservativeness retained for provenance. The main manuscript replaces this summary with factorized effectivity anatomy}\label{fig:S3}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.94\linewidth,height=0.68\textheight,keepaspectratio]{supplement_figures/S4_route_components.pdf}
+\caption{Historical route-component anatomy for M8 and M16. Right-hand-side and solution-space components are not added across spaces}\label{fig:S4}
+\end{figure}
+
+\section{Claim boundaries and machine-readable ledger}
+The CSV file \texttt{Paper2\_claim\_evidence\_matrix\_v0.10.0.csv} remains
+the authoritative record for claims frozen through v0.10.0. The G2-20
+execution report and adjudication extend it for the response-route theorem,
+new holdout, independent backend, and effectivity analysis; historical claim
+IDs and evidence tiers were not rewritten.
+The complete row-level matrix is distributed as CSV rather than typeset at an
+illegible scale in this PDF. Table~\ref{tab:S9} retains the concise inference
+boundary needed for human review.
+
+\begin{table}[htbp]\centering\small
+\caption{Interpretation boundary by claim domain}\label{tab:S9}
+\input{T4_claim_boundaries.tex}
+\end{table}
+
+\section*{Data and code availability}
+The existing non-confidential reproducibility artifact is archived as
+\href{https://doi.org/10.5281/zenodo.21833850}{Zenodo concept DOI
+10.5281/zenodo.21833850}; the public implementation is available from the
+\href{https://github.com/yqma7980/scale-explicit-matrix-perturbation-observability}{GitHub repository}.
+The v1.1.0 G2-20 release package contains the new holdout, route results,
+independent-backend audit, analysis tables, scripts, and hashes. The archive
+excludes Abaqus executables, user-element source, solver state histories, and
+engineering project data.
+
+\end{document}

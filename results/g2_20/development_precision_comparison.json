@@ -1,0 +1,17 @@
+{
+  "boolean_mismatch_count": 0,
+  "boolean_mismatches": [],
+  "maximum_normalized_difference": "1",
+  "maximum_record": {
+    "field": "maximum_reference_relative_residual",
+    "higher": "1.5218931808031971849258142338943549255562469774542446788519096433249413084648945159815935732739943397373880681094344266643710893451492876127067731422340524955301161395714e-186",
+    "key": [
+      "DEVELOPMENT",
+      "NONSYMMETRIC_D02_C06_E1eM14",
+      "DECIMAL_SOURCE"
+    ],
+    "lower": "0.0"
+  },
+  "row_count": 600,
+  "schema_version": "1.0"
+}

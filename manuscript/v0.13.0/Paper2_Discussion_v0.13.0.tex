@@ -1,0 +1,82 @@
+\subsection{The computational object beyond matrix diagnostics}
+
+The method addresses a question that matrix amplitude and conditioning leave
+open. The quantities $\mu_J$, $\rho_1$, $\rho_g$, and $\kappa(J)$ quantify
+representation-dependent change or worst-direction sensitivity. They do not
+identify whether the selected solution activates the perturbation range.
+Proposition~\ref{prop:p2} makes that information deficit exact: all four
+matrix-level quantities can be matched while the realized response changes
+from the guarded-inverse bound to zero. Structured and componentwise
+conditioning sharpen the admissible perturbation model
+\cite{S39,S40,S41}, but a selected response still requires the direction
+$Ez$ and its propagation by $A^{-1}$.
+
+The second advance concerns computation of that response. Direct subtraction
+and the response equation are algebraically equivalent in exact arithmetic,
+yet they form different finite-precision operation graphs.
+Propositions~\ref{prop:p4} and \ref{prop:p5} provide separate a posteriori
+error enclosures for those graphs. This is the central difference from a
+generic verified solve: the solve-error ingredients are propagated to a
+specific perturbation-response object, and the forcing-construction defect is
+retained when the declared perturbation and realized solve operands differ at
+the last bit. The threshold relation in Corollary~\ref{cor:threshold} then
+turns the enclosed response into an above, below, or unresolved result without
+using a condition number as a surrogate decision.
+
+\subsection{Why the enclosures are conservative}
+
+Complete coverage and useful sharpness are different properties. The
+effectivity factorization in Eq.~\eqref{eq:effectivity_factorization}
+localizes the dominant source of conservativeness. Median inflation caused by
+the Frobenius majorant was almost unity, whereas replacing the realized
+residual direction by the worst inverse direction contributed median factors
+between $1.36\times10^3$ and $2.31\times10^4$. The large central ratios are
+therefore not primarily a Frobenius-versus-spectral artifact; they arise
+because a valid normwise residual bound discards directional alignment.
+
+The multivariable analysis also prevents overinterpreting a single marginal
+correlation. Condition exponent explained most registered variation in the
+development design, but its drop-one partial $R^2$ fell from $0.855$ to
+$0.029$ on the original holdout. Matrix family, perturbation amplitude, and
+reference lane likewise changed importance across the two finite grids. The
+data support a mechanism---worst-direction replacement can be highly
+conservative---but not a universal effectivity scaling law. The extreme
+$\log_{10}I_{\rm eff}=86.90$ further illustrates why ratios become
+unstable when the true error approaches zero even though absolute coverage
+remains valid.
+
+\subsection{What the two routes reveal}
+
+The response equation reduced decimal-source reference error in 295/300
+development cases and 271/300 new-holdout cases. Its enclosure was also
+smaller in 283/300 and 229/300 cases. Binary64-operand comparisons were less
+separated: the response route had lower error in 199/300 development and
+160/300 holdout cases, and lower bounds in 229/300 and 188/300. These
+differences are consistent with the operation graphs. Direct subtraction can
+lose small responses between two complete parent solutions; the response
+equation avoids that subtraction but inherits forcing-construction and
+response-solve errors. The new result is not that one graph always wins, but
+that both can now be compared through valid route-specific enclosures rather
+than raw arithmetic error alone.
+
+\subsection{Computational-mechanics meaning and scope}
+
+For a frozen coupled tangent, the method answers whether the correction
+induced by a tangent-only modification is above, below, or unresolved with
+respect to an independently supplied response threshold. A solver developer
+may connect that threshold to an accepted Newton-correction tolerance, a
+residual scale, an energy norm, or a quantity-of-interest budget. Such a
+choice converts a vague statement that the matrix change is \emph{small}
+into a testable statement about the selected correction at one nonlinear
+state. M8 and M16 demonstrate this chain for
+displacement--pressure--saturation operators with explicit field scales; both
+operation graphs excluded the special threshold zero.
+
+The present implementation is intentionally a high-precision reference
+benchmark. It does not select a perturbation, prove nonlinear convergence,
+or certify an engineering model. It is also not an outward-rounded interval
+solver. Sparse estimation, controlled large-system sequences, blind transfer,
+and coverage--tightness--cost validation belong to a separate scalable-method
+study. Consolidating these limits here preserves the positive result: a
+coordinate-consistent, operation-graph-specific response can be enclosed and
+independently checked before a production estimator is judged against it.

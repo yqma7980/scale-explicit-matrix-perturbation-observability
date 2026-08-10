@@ -1,0 +1,80 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-08-10",
+  "study_id": "G2_20_CMAME_ROUTE_SPECIFIC_ENCLOSURE_REVISION",
+  "parent": {
+    "manuscript_sha256": "6ABC90BB5A0964A77BA00A11A400F4240EB4E1F9C02A65B9F9B68E564F6A2E30",
+    "bibliography_sha256": "ECFEF073AC4A4F6069431BDC53D3189A651D406AF6FB6FEF25919F280EC4212C",
+    "development_systems_sha256": "C7FDF9795C24F99625EEE84190A89C781E1D9D6C725765E2CD7D3B1664542446",
+    "development_capture_sha256": "5133ACFE55FDC7DDAF67AC0D75C792F127D6D3E6B6B4FF7D890C8AC8050C18B7",
+    "effectivity_rows_sha256": "4CA125DEB5AB7CDF6856681E197EF713A9DD351D508849822BFEB431FA390ED3",
+    "route_rows_sha256": "9B9C0E8C3D4840D2A26186A9E8E5C8B684D21D78C963F8E03632A472318B4D0F"
+  },
+  "precision": {
+    "primary_digits": 120,
+    "comparison_digits": 180,
+    "independent_decimal_digits": 160,
+    "comparison_margin": "1e-100"
+  },
+  "norm_contract": {
+    "vector": "EUCLIDEAN_2",
+    "inverse_majorant": "FROBENIUS_OF_EXPLICIT_HIGH_PRECISION_INVERSE",
+    "perturbation_majorant": "FROBENIUS",
+    "statement": "norm2(M)<=normF(M)"
+  },
+  "development": {
+    "expected_rows": 300,
+    "source": "Paper2_G2_03/matrix_families/decimal_systems.jsonl"
+  },
+  "holdout": {
+    "master_seed": 2026081002,
+    "families": ["SPD", "NONSYMMETRIC", "SADDLE_POINT_LIKE"],
+    "dimensions": [2, 4, 8, 16],
+    "condition_exponents": [0, 11, 12, 13, 14],
+    "guard_epsilons": ["7e-17", "7e-16", "7e-15", "7e-13", "7e-9"],
+    "cases_per_family_per_dimension": 25,
+    "expected_rows": 300,
+    "status_at_freeze": "NOT_GENERATED"
+  },
+  "response_model": {
+    "realized_perturbation": "E_lane=A_lane-J_lane",
+    "forcing_operand": "f_tilde=fl(-DeltaJ_binary*z_tilde)",
+    "parent": "U_z=beta_J*norm2(b-J*z_tilde)",
+    "parent_propagation": "U_parentprop=beta_A*alpha_E*U_z",
+    "forcing": "U_forcing=beta_A*norm2(f_tilde+E_lane*z_tilde)",
+    "response_solve": "U_solve=beta_A*norm2(f_tilde-A*delta_tilde)",
+    "total": "U_response=U_parentprop+U_forcing+U_solve",
+    "fitted_multiplier": "FORBIDDEN"
+  },
+  "independent_backend_subset": {
+    "cases": 36,
+    "families": ["SPD", "NONSYMMETRIC", "SADDLE_POINT_LIKE"],
+    "dimensions": [2, 4, 8, 16],
+    "condition_epsilon_pairs": [
+      [0, "7e-17"],
+      [12, "7e-15"],
+      [14, "7e-9"]
+    ]
+  },
+  "acceptance_gates": {
+    "development_response_source_coverage_count": 300,
+    "development_response_binary_coverage_count": 300,
+    "holdout_response_source_coverage_count": 300,
+    "holdout_response_binary_coverage_count": 300,
+    "false_enclosure_count_max": 0,
+    "component_bound_failure_count_max": 0,
+    "nonfinite_count_max": 0,
+    "reference_relative_residual_max": "1e-90",
+    "normalized_120_180_difference_max": "1e-90",
+    "repeatability": "EXACT_SHA256",
+    "independent_decimal_case_count": 36,
+    "independent_decimal_normalized_difference_max": "1e-80"
+  },
+  "no_gate": [
+    "effectivity",
+    "route_superiority",
+    "threshold_decision_count",
+    "finite_element_transfer",
+    "nonlinear_behavior"
+  ]
+}

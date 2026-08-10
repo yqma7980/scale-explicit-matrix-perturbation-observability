@@ -1,0 +1,57 @@
+{
+  "boolean_fields": [
+    "direct_coverage",
+    "response_coverage",
+    "parent_z_coverage",
+    "parent_zg_coverage",
+    "subtraction_coverage",
+    "response_parentprop_coverage",
+    "response_forcing_coverage",
+    "response_solve_coverage",
+    "finite"
+  ],
+  "boolean_mismatch_count": 0,
+  "boolean_mismatches": [],
+  "core_scalar_fields": [
+    "beta_J_frobenius",
+    "beta_A_frobenius",
+    "alpha_E_frobenius",
+    "realized_vs_declared_perturbation_gap",
+    "U_z",
+    "U_zg",
+    "U_sub",
+    "U_direct",
+    "U_response_parentprop",
+    "U_response_forcing",
+    "U_response_solve",
+    "U_response",
+    "error_z",
+    "error_zg",
+    "error_subtraction",
+    "error_direct",
+    "error_response",
+    "actual_response_parentprop",
+    "actual_response_forcing",
+    "actual_response_solve",
+    "reference_response_norm",
+    "reference_parent_norm",
+    "eta_reference",
+    "observed_direct_norm",
+    "observed_response_norm",
+    "reference_identity_difference",
+    "maximum_reference_relative_residual"
+  ],
+  "maximum_normalized_difference": "5.16046313187642103697007556199213887582855722167622488205770379E-110",
+  "maximum_record": {
+    "field": "U_response",
+    "higher": "0.0001656804029645087121949345065792460043246374975221651699310248561144154194836877422950088434600320546297149761246313187642103697007556199213887582855722167622488205770379",
+    "key": [
+      "DEVELOPMENT",
+      "SADDLE_POINT_LIKE_D16_C10_E1eM8",
+      "DECIMAL_SOURCE"
+    ],
+    "lower": "0.00016568040296450871219493450657924600432463749752216516993102485611441541948368774229500884346003205462971492452"
+  },
+  "row_count": 600,
+  "schema_version": "1.0"
+}

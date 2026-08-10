@@ -1,0 +1,70 @@
+\begin{algorithm}[H]
+\caption{Coordinate and reference-problem declaration}
+\label{alg:declaration}
+\begin{algorithmic}[1]
+\Require $J$, guarded operand $A$, declared perturbation $\Delta J$, $b$,
+coordinate maps $D_x,D_r$, norm $\lVert\cdot\rVert$, computational route,
+reference contract, arithmetic specification, and optional threshold $\tau$
+\Ensure A frozen solved-space problem and the realized perturbation $E=A-J$
+\State Restrict the system to the prescribed well-posed solved space
+\State Transform $J$, $A$, $\Delta J$, and $b$ consistently with $D_x,D_r$
+\State Set $E\gets A-J$ in the selected reference contract
+\State Check dimensions, finiteness, operand identity, and reference-contract separation
+\State Freeze the route, precision, norm, threshold, and output fields before evaluation
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+\caption{Direct-difference finite-precision error enclosure}
+\label{alg:direct}
+\begin{algorithmic}[1]
+\Require Frozen output of Algorithm~\ref{alg:declaration}
+\Ensure $\widetilde\delta_{\rm d}$, $U_{\rm d}$, $[L_{\rm d},H_{\rm d}]$
+\State Compute $\widetilde z\approx J^{-1}b$ and
+$\widetilde z_g\approx A^{-1}b$
+\State Form $r_z=b-J\widetilde z$ and
+$r_{z_g}=b-A\widetilde z_g$
+\State Obtain majorants $\beta_J\geq\lVert J^{-1}\rVert_2$ and
+$\beta_A\geq\lVert A^{-1}\rVert_2$
+\State Set $U_z\gets\beta_J\lVert r_z\rVert_2$ and
+$U_{z_g}\gets\beta_A\lVert r_{z_g}\rVert_2$
+\State Compute $\widetilde\delta_{\rm d}\gets
+\operatorname{fl}(\widetilde z_g-\widetilde z)$ and its subtraction bound
+$U_{\rm sub}$
+\State Set $U_{\rm d}\gets U_z+U_{z_g}+U_{\rm sub}$
+\State Set $d_{\rm d}\gets\lVert\widetilde\delta_{\rm d}\rVert_2$,
+$L_{\rm d}\gets\max(0,d_{\rm d}-U_{\rm d})$, and
+$H_{\rm d}\gets d_{\rm d}+U_{\rm d}$
+\State Report the relation of $[L_{\rm d},H_{\rm d}]$ to $\tau$
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+\caption{Response-equation finite-precision error enclosure}
+\label{alg:response}
+\begin{algorithmic}[1]
+\Require Frozen output of Algorithm~\ref{alg:declaration}
+\Ensure $\widetilde\delta_{\rm r}$, $U_{\rm r}$, $[L_{\rm r},H_{\rm r}]$
+\State Compute $\widetilde z\approx J^{-1}b$ and
+$r_z=b-J\widetilde z$
+\State Obtain $\beta_J\geq\lVert J^{-1}\rVert_2$,
+$\beta_A\geq\lVert A^{-1}\rVert_2$, and
+$\alpha_E\geq\lVert E\rVert_2$; set
+$U_z\gets\beta_J\lVert r_z\rVert_2$
+\State Construct the route operand
+$\widetilde f\gets\operatorname{fl}(-\Delta J\widetilde z)$
+\State Compute $\widetilde\delta_{\rm r}\approx A^{-1}\widetilde f$
+\State Form $q_f=\widetilde f+E\widetilde z$ and
+$r_\delta=\widetilde f-A\widetilde\delta_{\rm r}$
+\State Set
+$U_{\rm parent}\gets\beta_A\alpha_EU_z$,
+$U_{\rm force}\gets\beta_A\lVert q_f\rVert_2$, and
+$U_{\rm solve}\gets\beta_A\lVert r_\delta\rVert_2$
+\State Set
+$U_{\rm r}\gets U_{\rm parent}+U_{\rm force}+U_{\rm solve}$
+\State Set $d_{\rm r}\gets\lVert\widetilde\delta_{\rm r}\rVert_2$,
+$L_{\rm r}\gets\max(0,d_{\rm r}-U_{\rm r})$, and
+$H_{\rm r}\gets d_{\rm r}+U_{\rm r}$
+\State Report the relation of $[L_{\rm r},H_{\rm r}]$ to $\tau$
+\end{algorithmic}
+\end{algorithm}

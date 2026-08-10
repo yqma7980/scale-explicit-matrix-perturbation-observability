@@ -1,0 +1,21 @@
+{
+  "I_eff": 7.932108412266332e+86,
+  "I_eff_status": "FINITE",
+  "R_U": 7.932108412266332e+86,
+  "R_U_status": "FINITE",
+  "U_absolute": 3.965663540062402e-15,
+  "U_relative_to_parent": 1.600411557053742e-15,
+  "condition_exponent": 1,
+  "coverage": true,
+  "dataset": "holdout",
+  "dimension": 16,
+  "epsilon": 3e-17,
+  "family": "SPD",
+  "lane": "binary64-operand",
+  "log10_I_eff": 86.89938864130322,
+  "reference_error_absolute": 4.99950748773156e-102,
+  "reference_response_relative": 2.017637018902618e-102,
+  "seed": 1045524413347893163,
+  "system_id": "HOLDOUT_SPD_D16_C01_E3eM17",
+  "undercoverage": false
+}

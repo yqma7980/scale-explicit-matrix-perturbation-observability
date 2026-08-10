@@ -1,10 +1,10 @@
 cff-version: 1.2.0
 message: "If you use this artifact, please cite the archived release."
-title: "Scale-explicit matrix-perturbation observability: reproducibility artifact"
+title: "Route-specific finite-precision qualification of tangent perturbations: reproducibility artifact"
 type: software
-version: 1.0.0
-date-released: 2026-08-07
-doi: 10.5281/zenodo.21833851
+version: 1.1.0
+date-released: 2026-08-10
+doi: 10.5281/zenodo.21833850
 authors:
   - family-names: Liang
     given-names: Bing
@@ -20,15 +20,15 @@ authors:
     given-names: Shi
     affiliation: "China Coal Research Institute"
 repository-code: "https://github.com/yqma7980/scale-explicit-matrix-perturbation-observability"
-url: "https://doi.org/10.5281/zenodo.21833851"
+url: "https://doi.org/10.5281/zenodo.21833850"
 identifiers:
   - type: doi
-    value: 10.5281/zenodo.21833851
-    description: Archived release DOI
+    value: 10.5281/zenodo.21833850
+    description: Concept DOI representing all archived versions
 license: MIT
 keywords:
   - matrix perturbation
   - finite elements
-  - numerical observability
-  - uncertainty qualification
+  - directional response
+  - finite-precision error enclosure
   - coordinate scaling

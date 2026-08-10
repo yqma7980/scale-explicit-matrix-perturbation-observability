@@ -1,0 +1,28 @@
+{
+  "by_lane": {
+    "BINARY64_OPERAND": {
+      "component_failure_count": 0,
+      "direct_coverage_count": 300,
+      "nonfinite_count": 0,
+      "response_coverage_count": 300,
+      "rows": 300
+    },
+    "DECIMAL_SOURCE": {
+      "component_failure_count": 0,
+      "direct_coverage_count": 300,
+      "nonfinite_count": 0,
+      "response_coverage_count": 300,
+      "rows": 300
+    }
+  },
+  "dataset": "DEVELOPMENT",
+  "maximum_reference_relative_residual": "9.9714471172453788973466087556528771933938349895545932630754215700861535226076183822285708958838740601204624784504924443566015883676776769872762772702910002388768201290167e-187",
+  "output_row_count": 600,
+  "precision_digits": 180,
+  "response_lower_error_counts": {
+    "DIRECT_OR_TIE": 106,
+    "RESPONSE": 494
+  },
+  "schema_version": "1.0",
+  "system_count": 300
+}

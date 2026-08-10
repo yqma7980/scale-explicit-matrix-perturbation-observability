@@ -1,0 +1,57 @@
+{
+  "boolean_fields": [
+    "direct_coverage",
+    "response_coverage",
+    "parent_z_coverage",
+    "parent_zg_coverage",
+    "subtraction_coverage",
+    "response_parentprop_coverage",
+    "response_forcing_coverage",
+    "response_solve_coverage",
+    "finite"
+  ],
+  "boolean_mismatch_count": 0,
+  "boolean_mismatches": [],
+  "core_scalar_fields": [
+    "beta_J_frobenius",
+    "beta_A_frobenius",
+    "alpha_E_frobenius",
+    "realized_vs_declared_perturbation_gap",
+    "U_z",
+    "U_zg",
+    "U_sub",
+    "U_direct",
+    "U_response_parentprop",
+    "U_response_forcing",
+    "U_response_solve",
+    "U_response",
+    "error_z",
+    "error_zg",
+    "error_subtraction",
+    "error_direct",
+    "error_response",
+    "actual_response_parentprop",
+    "actual_response_forcing",
+    "actual_response_solve",
+    "reference_response_norm",
+    "reference_parent_norm",
+    "eta_reference",
+    "observed_direct_norm",
+    "observed_response_norm",
+    "reference_identity_difference",
+    "maximum_reference_relative_residual"
+  ],
+  "maximum_normalized_difference": "6.8203868139413881317496207763048944451819009551247602057079097123E-107",
+  "maximum_record": {
+    "field": "U_direct",
+    "higher": "0.077804874164543784917812057399232600527587575072443176754345883575440086041166261753749922933092697626785812597131860586118682503792236951055548180990448752397942920902877",
+    "key": [
+      "HOLDOUT_G2_20",
+      "G2H_SADDLE_POINT_LIKE_D02_C14_E7eM15",
+      "DECIMAL_SOURCE"
+    ],
+    "lower": "0.077804874164543784917812057399232600527587575072443176754345883575440086041166261753749922933092697626785880801"
+  },
+  "row_count": 600,
+  "schema_version": "1.0"
+}

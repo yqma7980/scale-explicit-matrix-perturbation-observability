@@ -1,0 +1,24 @@
+{
+  "decimal_digits": 160,
+  "imports_mpmath": false,
+  "imports_numpy": false,
+  "imports_scipy": false,
+  "lane_comparison_count": 72,
+  "maximum_normalized_difference": "6.9511487791608603E-153",
+  "maximum_record": {
+    "U_response_normalized_difference": "7.9306677628E-160",
+    "condition_exponent": 14,
+    "decimal_digits": 160,
+    "delta_normalized_difference": "6.9511487791608603E-153",
+    "dimension": 16,
+    "epsilon": "7e-9",
+    "family": "SADDLE_POINT_LIKE",
+    "lane": "DECIMAL_SOURCE",
+    "maximum_normalized_difference": "6.9511487791608603E-153",
+    "system_id": "G2H_SADDLE_POINT_LIKE_D16_C14_E7eM9"
+  },
+  "pass": true,
+  "registered_gate": "1E-80",
+  "schema_version": "1.0",
+  "system_count": 36
+}

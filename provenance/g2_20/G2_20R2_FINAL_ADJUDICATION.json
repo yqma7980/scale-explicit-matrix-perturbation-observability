@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-08-10",
+  "classification": "PASS_RESPONSE_ROUTE_ENCLOSURE_VALIDATED_ON_DEVELOPMENT_AND_NEW_HOLDOUT",
+  "preserved_first_execution": {
+    "classification": "INCONCLUSIVE_REFERENCE_OR_PRECISION_FAILURE",
+    "status_sha256": "4A7072DBEC3B3C0A5CEDF740A4A91D5AA1FE12827BECD44B8D7CAAFBBFC813D2",
+    "reason": "The first comparator used a self-relative denominator for near-zero components."
+  },
+  "coverage": {
+    "development_decimal_source": "300/300",
+    "development_binary64_operand": "300/300",
+    "holdout_decimal_source": "300/300",
+    "holdout_binary64_operand": "300/300",
+    "false_enclosure_count": 0,
+    "component_bound_failure_count": 0,
+    "nonfinite_count": 0
+  },
+  "precision": {
+    "development_core_maximum_normalized_120_180_difference": "5.16046313187642103697007556199213887582855722167622488205770379e-110",
+    "holdout_core_maximum_normalized_120_180_difference": "6.8203868139413881317496207763048944451819009551247602057079097123e-107",
+    "core_boolean_mismatch_count": 0,
+    "maximum_reference_relative_residual": "1.0377503895048223206924380355576153803984190549199624529809358938037424069485773656013154343353835462507298392604871884347762841839551889101867855437130840760378253288375e-184",
+    "run1_run2_repeatability": "EXACT_SHA256"
+  },
+  "independent_decimal_backend": {
+    "systems": 36,
+    "lane_comparisons": 72,
+    "maximum_normalized_difference": "6.9511487791608603e-153",
+    "imports_mpmath": false,
+    "imports_numpy": false,
+    "imports_scipy": false
+  },
+  "holdout": {
+    "rows": 300,
+    "sha256": "6C09C195F019F018B43CD430DE1C50F45CEC7E4EDED7E87DD24B50911886B6EA",
+    "generated_after_preregistration": true
+  },
+  "claim_boundary": {
+    "interval_or_outward_rounded_certificate": false,
+    "route_superiority": false,
+    "tightness_gate": false,
+    "scalable_sparse_estimator": false,
+    "nonlinear_or_engineering_consequence": false
+  }
+}

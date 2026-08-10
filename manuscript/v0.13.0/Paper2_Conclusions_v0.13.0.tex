@@ -1,0 +1,27 @@
+This study formulated tangent-only perturbation assessment as a selected
+finite-response problem rather than a matrix-magnitude test. Exact algebra
+separates the represented perturbation, worst-direction amplification, and
+realized forcing direction, while coordinate covariance prevents a
+same-numeric diagonal from being mistaken for the same operator after
+rescaling.
+
+The main computational result is a pair of a posteriori finite-precision error
+enclosures for two algebraically equivalent but arithmetically distinct
+operation graphs. The direct enclosure propagates two parent-solve errors and
+subtraction error; the response enclosure propagates parent error,
+forcing-construction defect, and response-solve residual. Each route covered
+300/300 development and 300/300 newly generated holdout systems in both
+reference contracts. An independent Decimal implementation confirmed a
+stratified 72-lane subset to $6.96\times10^{-153}$ normalized agreement.
+
+The analysis also explains why coverage can coexist with conservative bounds.
+Frobenius majorization contributed median factors near unity, whereas
+directional-alignment inflation contributed factors of $10^3$--$10^4$.
+The response graph often reduced both arithmetic error and enclosure size, but
+the binary64 and holdout results ruled out a universal route ranking.
+
+Application to 196- and 900-dimensional coupled finite-element tangents showed
+that the full coordinate--response--enclosure chain can qualify archived
+application operators. The resulting implementation is a reproducible
+reference benchmark for future sparse estimators, not a replacement for their
+independent coverage, tightness, and cost validation.

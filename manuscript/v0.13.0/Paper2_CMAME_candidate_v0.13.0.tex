@@ -1,0 +1,452 @@
+\documentclass[preprint,12pt]{elsarticle}
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+\setmainfont{Times New Roman}
+\setsansfont{Times New Roman}
+\setmonofont{Courier New}
+\usepackage{amsmath,amsthm,mathtools,unicode-math}
+\setmathfont{STIX Two Math}
+\usepackage{graphicx,booktabs,tabularx,xltabular,array,ragged2e}
+\graphicspath{{figures/}}
+\usepackage{caption,float,placeins,needspace}
+\usepackage{lineno,setspace,microtype}
+\usepackage{enumitem,xcolor}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={Coordinate-Explicit and Route-Specific Finite-Precision Qualification of Tangent-Only Perturbations}}
+\renewcommand{\tabularxcolumn}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+\renewcommand{\arraystretch}{1.14}
+\captionsetup{font=small,labelfont=bf,skip=5pt}
+\setlength{\parindent}{1.5em}
+\setlength{\parskip}{0.08em}
+\setlength{\emergencystretch}{2em}
+\setstretch{1.04}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\journal{Computer Methods in Applied Mechanics and Engineering}
+
+\begin{document}
+\begin{frontmatter}
+
+\title{Coordinate-Explicit and Route-Specific Finite-Precision Qualification of Tangent-Only Perturbations in Coupled Finite-Element Linearizations}
+\author[aff1]{Bing Liang}
+\author[aff1]{Yangqi Ma}
+\author[aff1]{Weiji Sun\corref{cor1}}
+\ead{sunweiji-1231@163.com}
+\author[aff2]{Shi He}
+\cortext[cor1]{Corresponding author.}
+\address[aff1]{School of Mechanics and Engineering, Liaoning Technical University, No. 47 Zhonghua Road, Fuxin, Liaoning 123000, China}
+\address[aff2]{China Coal Research Institute, Beijing 100013, China}
+
+\begin{abstract}
+Matrix norms and condition estimates quantify perturbation amplitude or worst-direction sensitivity, but they do not determine the response to one prescribed forcing direction or whether that response is distinguishable from finite-precision error. This study develops a coordinate-explicit, route-specific error-enclosure method for tangent-only perturbations in coupled finite-element linearizations. The method combines an exact finite-response identity, directional non-determination, coordinate covariance, and two a posteriori enclosures associated with distinct operation graphs: direct subtraction of parent solutions and solution of the response equation. Each enclosure covered 300/300 development systems and 300/300 newly generated holdout systems under both decimal-source and binary64-operand reference contracts. An independent 160-digit Decimal implementation checked 72 stratified lane comparisons with a maximum normalized difference of $6.96\times10^{-153}$. The response equation had lower reference error in 295/300 development and 271/300 new-holdout decimal-source cases, but no universal route ranking followed. Effectivity remained conservative. Its factorization showed median Frobenius-majorant inflation near $1.000$--$1.005$, whereas median directional-alignment inflation ranged from $1.36\times10^{3}$ to $2.31\times10^{4}$. Replication on two archived coupled finite-element tangents of dimensions 196 and 900 then demonstrated route-specific threshold qualification on application operators. The resulting procedure provides a reproducible reference benchmark for evaluating future scalable response estimators.
+\end{abstract}
+
+\begin{keyword}
+tangent matrix \sep matrix perturbation \sep finite-element linearization \sep coordinate scaling \sep finite-precision error enclosure \sep directional response
+\end{keyword}
+
+\end{frontmatter}
+\linenumbers
+
+\section{Introduction}
+
+Coupled nonlinear finite-element models repeatedly form block tangents whose unknowns carry different units and characteristic scales. Implementations may modify the matrix passed to a linear solver without adding the same term to the residual. We call this a \emph{tangent-only matrix perturbation}. Such a perturbation is distinct from residual-consistent stabilization and from a consistent algorithmic tangent, whose derivative must match the discrete constitutive update \cite{S32}. It is also distinct from inexact-Newton forcing, pseudo-transient continuation, conditioning-oriented finite-element reformulation, and preconditioning, which target nonlinear globalization, operator conditioning, or linear-solver performance rather than the response to one prescribed tangent modification \cite{S21,S29,S30,S31,S33,S34,S36}.
+
+Classical diagnostics do not answer the complete selected-response question. A relative matrix norm measures perturbation amplitude in one representation; a condition estimate bounds worst-direction sensitivity; structured or componentwise conditioning describes admissible perturbation patterns; scaling changes the numerical coordinates; and verified or mixed-precision methods assess a prescribed solve \cite{S01,S02,S03,S05,S06,S07,S08,S11,S12,S13,S26,S28,S35,S37,S38,S39,S40,S41,S42,S43}. These tools remain indispensable, but neither matrix amplitude nor a worst-direction bound determines the realized action of $\Delta Jz$. A second distinction then appears in finite precision: the same exact response can be evaluated by subtracting two parent solutions or by solving its response equation, and the two operation graphs propagate different errors.
+
+The computational advance developed here is the joint treatment of those two missing objects. The method first preserves the coordinate representation and selected forcing direction, then derives a posteriori finite-precision error enclosures for both operation graphs. The direct route propagates two parent-solve errors and subtraction error. The response route propagates the unperturbed-parent error, forcing-construction defect, and response-solve residual through the perturbed inverse. Consequently, route-specific intervals can be compared with a threshold without treating a matrix norm, a condition number, or raw route error as a substitute for the realized response.
+
+Four contributions follow. First, Propositions~1--3 formalize the exact finite response, prove that matched matrix and worst-direction metrics do not determine a selected response, and distinguish coordinate covariance from same-numeric redeclaration. Second, Propositions~4 and 5 derive direct-difference and response-equation error enclosures, and Corollary~1 gives a sound threshold relation. Third, both enclosures are evaluated on a common 300-system development design and a newly generated 300-system holdout under decimal-source and binary64-operand reference contracts; an independent Decimal backend audits a stratified subset. Fourth, effectivity is decomposed into norm-majorant and directional-alignment inflation, then the complete procedure is replicated on two archived coupled finite-element tangents. The contribution is a reference-level response-enclosure method; sparse production estimation and controlled large-system cost validation remain a separate problem.
+
+Table~\ref{tab:closest} identifies the object supplied beyond the closest computational contexts. Figure~\ref{fig:1} gives the method architecture, and Algorithms~\ref{alg:declaration}--\ref{alg:response} specify the two route implementations.
+
+\begin{table}[htbp]
+\centering
+\footnotesize
+\caption{Closest computational contexts and the response object supplied by this work.}
+\label{tab:closest}
+\begin{tabularx}{\linewidth}{>{\RaggedRight\arraybackslash}p{0.19\linewidth} >{\RaggedRight\arraybackslash}p{0.27\linewidth} >{\RaggedRight\arraybackslash}p{0.23\linewidth} X}
+\toprule
+Context & Primary object & Missing selected-response object & Supplied here \\
+\midrule
+Normwise and structured perturbation analysis & Matrix change and worst-case sensitivity & Realized action for one $b$ and $\Delta J$ & Directional response identity and non-determination result \\
+Scaling and equilibration & Coordinate representation and conditioning & Same-operator versus redeclared-operator distinction & Coordinate-covariant perturbation contract \\
+Residual-based or verified solve analysis & Error in one prescribed linear solve & Error propagation through two response operation graphs & Route-specific a posteriori enclosures \\
+Newton regularization and continuation & Nonlinear or linear convergence behavior & Finite-precision response of one frozen tangent & Threshold-qualified local response only \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.98\linewidth,height=0.72\textheight,keepaspectratio]{F1_assessment_sequence.pdf}
+\caption{Coordinate-explicit response-enclosure architecture. Matrix and inverse measures precede the selected response, after which the direct-difference and response-equation operation graphs produce separate finite-precision intervals. An external threshold gives above, below, or unresolved outcomes.}
+\label{fig:1}
+\end{figure}
+
+Section~2 defines the response and algorithms. Sections~3 and 4 establish directional and coordinate properties. Section~5 derives and validates both error enclosures and analyzes their effectivity. Section~6 applies the method to two coupled finite-element linearizations, and Section~7 integrates the computational implications and scope.
+
+\section{Mathematical and Computational Framework}
+
+\subsection{Problem definition and solved-space contract}
+
+Let $J$ and $J+\Delta J$ be square, nonsingular operators on one solved space, with a common right-hand side $b$ and one coordinate representation. A constrained problem enters only after its free or otherwise well-posed reduced space is specified. The vector norm and subordinate matrix norm are fixed together. The comparison therefore excludes changes in load, coordinates, nullspace, or residual root; under these assumptions the finite response identity has a single interpretation \cite{S02,S03}.
+
+\subsection{Matrix, operator, and directional measures}
+
+Let $z$, $z_g$, and $\delta z=z_g-z$ denote the unperturbed solution, perturbed solution, and response. The retained quantities answer separate questions: $\mu_J$ measures matrix amplitude; $\rho_1$ and $\rho_g$ measure first-order and finite worst-direction amplification; $\eta_z$ measures the selected response; $G_g$ compares that response with matrix amplitude; and $\kappa(J)$ measures normwise sensitivity. An operator norm is not a selected-probe response, and a condition number is not a mechanism classifier \cite{S01,S03}; the quantities form an assessment chain, not a composite score.
+
+Figure~\ref{fig:2} places a tangent-only perturbation within a generic mixed-field block operator without assigning physical meaning to one scalar diagonal coefficient.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.98\linewidth,height=0.72\textheight,keepaspectratio]{F2_mixed_field_tangent_anatomy.pdf}
+\caption{Mixed-field tangent anatomy. (a) Coupled displacement, pressure, and saturation blocks carry distinct variable units. (b) A scalar identity perturbation in physical coordinates becomes field-scale dependent after coordinate transformation.}
+\label{fig:2}
+\end{figure}
+
+Equation~\eqref{eq:framework_quantities} defines the solved systems and retained metrics. Table~\ref{tab:1} lists their roles and their non-substitution rules.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Retained metrics and their non-substitution rules.}
+\label{tab:1}
+\input{T1_metric_definitions.tex}
+\end{table}
+
+\begin{linenomath*}
+\begin{equation}
+\begin{aligned}
+Jz &= b, & (J+\Delta J)z_g &= b, & \delta z &= z_g-z,\\
+\mu_J &= \frac{\lVert\Delta J\rVert}{\lVert J\rVert}, &
+\rho_1 &= \lVert J^{-1}\Delta J\rVert, &
+\rho_g &= \lVert(J+\Delta J)^{-1}\Delta J\rVert,\\
+\eta_z &= \frac{\lVert\delta z\rVert}{\lVert z\rVert}, &
+G_g &= \frac{\eta_z}{\mu_J}\quad(\mu_J>0), &
+\kappa(J) &= \lVert J\rVert\,\lVert J^{-1}\rVert .
+\end{aligned}
+\label{eq:framework_quantities}
+\end{equation}
+\end{linenomath*}
+
+\subsection{Exact finite perturbation response}
+
+\begin{proposition}[Exact finite response]
+\label{prop:p1}
+Let $J$ and $A=J+\Delta J$ be nonsingular, with $Jz=b$ and
+$Az_g=b$. Then $\delta z=z_g-z$ satisfies
+\begin{linenomath*}
+\begin{equation}
+\begin{aligned}
+(J+\Delta J)\delta z &= -\Delta J z,\\
+\delta z &= -(J+\Delta J)^{-1}\Delta J z.
+\end{aligned}
+\label{eq:finite_response_identity}
+\end{equation}
+\end{linenomath*}
+No symmetry, definiteness, or small-perturbation assumption is required.
+\end{proposition}
+
+\begin{proof}
+Substitution of $z_g=z+\delta z$ into $Az_g=b=Jz$ gives
+$A\delta z=-\Delta Jz$. Nonsingularity of $A$ yields the second identity.
+\end{proof}
+
+The identity is classical perturbation algebra \cite{S02,S03}; its role here is to expose the realized forcing direction $\Delta Jz$ and the operator that propagates it. It is not itself a floating-point accuracy statement.
+
+Equation~\eqref{eq:guarded_inverse_bound} follows from the subordinate norm and gives $\eta_z\leq\rho_g$ for nonzero $z$. This is a worst-direction bound, whereas $\eta_z$ evaluates only the direction generated by the selected solution and perturbation. Equality may occur under alignment but is not implied for an arbitrary right-hand side. The bound remains finite whenever the perturbed operator is nonsingular, even when the Neumann condition below is unavailable.
+
+\begin{linenomath*}
+\begin{equation}
+\eta_z \leq \rho_g.
+\label{eq:guarded_inverse_bound}
+\end{equation}
+\end{linenomath*}
+
+Equation~\eqref{eq:neumann_bound} uses $E=J^{-1}\Delta J$, for which the response operator is $(I+E)^{-1}E$. If $\rho_1=\lVert E\rVert<1$, the Neumann series bounds the response by $\rho_1/(1-\rho_1)$. The denominator is essential; $\rho_1$ alone is only a first-order interpretation as $\rho_1\to0$. For $\rho_1\geq1$, Proposition~\ref{prop:p1} still holds for nonsingular matrices, but this Neumann argument provides no bound \cite{S02,S03}.
+
+\begin{linenomath*}
+\begin{equation}
+\rho_1<1,\qquad
+\eta_z \leq \frac{\rho_1}{1-\rho_1}.
+\label{eq:neumann_bound}
+\end{equation}
+\end{linenomath*}
+
+Equation~\eqref{eq:condition_comparison} records the submultiplicative estimate $\rho_1\leq\kappa(J)\mu_J$ in the same norm. If this product is below one, substitution in the Neumann result gives the stated finite comparison with its denominator. The estimate is coordinate-dependent, normwise, and worst case; it contains no information about the direction $\Delta Jz$. It can bound sensitivity under its assumptions but cannot identify the mechanism of one observed response \cite{S01,S03}.
+
+\begin{linenomath*}
+\begin{equation}
+\begin{aligned}
+\rho_1 &\leq \kappa(J)\mu_J,\\
+\kappa(J)\mu_J<1 &\ \Longrightarrow\ 
+\eta_z\leq\frac{\kappa(J)\mu_J}{1-\kappa(J)\mu_J}.
+\end{aligned}
+\label{eq:condition_comparison}
+\end{equation}
+\end{linenomath*}
+
+Changing $b$ adds a data-perturbation term, and changing the residual or its root is not a tangent-only comparison. A singular unreduced operator first requires a well-posed quotient, projection, generalized inverse, or reduced formulation \cite{S17,S20}. Finally, the identities compare two local linear solves at one state; Newton acceptance, globalization, basin, and final root require separate nonlinear evidence \cite{S21,S23}.
+
+\subsection{Computational assessment procedure}
+
+Algorithms~\ref{alg:declaration}--\ref{alg:response} turn the mathematical contracts into two explicit computational graphs. The declaration stage freezes the solved space, coordinates, reference contract, and arithmetic specification. The direct graph propagates two parent-solve errors and subtraction error; the response graph propagates parent, forcing-construction, and response-solve errors. Section~\ref{sec:coordinate} establishes the transformation requirement, and Section~\ref{sec:error_enclosure} proves the corresponding enclosures.
+
+\input{Paper2_Algorithms_v0.13.0.tex}
+
+The architecture is not an arbitrary checklist. Table~\ref{tab:necessity} links each component to a specific omission exposed by the existing evidence. The conclusions are intentionally local: they establish what is needed to interpret one selected response, not prevalence across operator populations.
+
+\begin{table}[htbp]
+\centering
+\small
+\caption{Evidence-backed necessity of the assessment components.}
+\label{tab:necessity}
+\input{T2_component_necessity_v0.10.0.tex}
+\end{table}
+
+\FloatBarrier
+\section{Analytical Verification}
+
+\begin{proposition}[Directional non-determination]
+\label{prop:p2}
+For every $\varepsilon>0$, there exist two perturbations with identical
+$\mu_J$, $\rho_1$, $\rho_g$, and $\kappa_2(J)$ but different realized
+responses $\eta_z$. Hence those scalar matrix and worst-direction quantities
+do not determine the response for a selected right-hand side.
+\end{proposition}
+
+\noindent\textit{Construction and proof.}
+Fix the Euclidean vector norm and spectral matrix norm, take $J=I_2$, and choose the first coordinate as the right-hand side. Two rank-one diagonal perturbations with the same amplitude $\varepsilon$ act respectively along and orthogonally to the unperturbed solution. Equation~\eqref{eq:p2_construction} isolates direction while holding the operator, norm, right-hand side, perturbation amplitude, and condition number fixed.
+
+\begin{linenomath*}
+\begin{equation}
+\begin{aligned}
+J&=I_2, & b&=e_1=[1,0]^{\mathsf T},\\
+\Delta J_A&=\varepsilon\,\operatorname{diag}(1,0), &
+\Delta J_B&=\varepsilon\,\operatorname{diag}(0,1), & \varepsilon&>0.
+\end{aligned}
+\label{eq:p2_construction}
+\end{equation}
+\end{linenomath*}
+
+The matrix and operator metrics are matched in the two cases. Since $\lVert J \rVert=1$, both perturbations give $\mu_J = \varepsilon$; since $J^{-1}=I_2$, both give $\rho_1 = \varepsilon$; and since the guarded inverse scales only the perturbed coordinate, both give $\rho_g = \varepsilon/(1+\varepsilon)$. The spectral condition number is one in each case. Thus even the combination of matrix amplitude, unguarded inverse amplification, guarded inverse amplification, and condition number is identical. This equality is stronger than matching only $\lVert \Delta J \rVert$: the two perturbations also have the same finite worst-direction bound. What remains unspecified by those metrics is whether the selected solution lies in the range of the perturbation. The construction therefore prepares a direct test of whether matched matrix-level and operator-level quantities determine one realized response.
+
+\begin{linenomath*}
+\begin{equation}
+\begin{aligned}
+\mu_J(A)&=\mu_J(B)=\varepsilon,\\
+\rho_1(A)&=\rho_1(B)=\varepsilon,\\
+\rho_g(A)&=\rho_g(B)=\frac{\varepsilon}{1+\varepsilon},\\
+\kappa_2(J)&=1.
+\end{aligned}
+\label{eq:p2_matched_metrics}
+\end{equation}
+\end{linenomath*}
+
+Equation~\eqref{eq:p2_matched_metrics} shows that the constructions have identical matrix amplitude, inverse-mediated measures, and condition number. Their realized responses nevertheless separate. In case A, the perturbation acts on $z=e_1$, giving $\eta_z=\varepsilon/(1+\varepsilon)$ and attaining the guarded-inverse bound. In case B, $\Delta J_Bz=0$, so the guarded and unguarded solutions coincide and $\eta_z=0$. The missing information is directional alignment between the solution, perturbation range, and propagated response. This proves Proposition~\ref{prop:p2}.
+
+Figure~\ref{fig:3} contrasts the aligned and orthogonal constructions under matched matrix and worst-direction quantities.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.98\linewidth,height=0.72\textheight,keepaspectratio]{F3_directional_response.pdf}
+\caption{Directional counterexample. Alignment geometry separates the selected probe from the perturbation range; matrix and worst-direction quantities remain matched while the realized response differs for six pre-specified perturbation amplitudes.}
+\label{fig:3}
+\end{figure}
+
+\begin{linenomath*}
+\begin{equation}
+\eta_z(A)=\frac{\varepsilon}{1+\varepsilon},
+\qquad \eta_z(B)=0.
+\label{eq:p2_realized_response}
+\end{equation}
+\end{linenomath*}
+
+Equation~\eqref{eq:p2_realized_response} records the exact directional separation used in the numerical reproduction.
+
+The pre-specified numerical reproduction evaluated six frozen amplitudes from $1\allowbreak\times10^{-12}$ to $1\allowbreak\times10^{-2}$ using an independent high-precision route for the exact construction. Across all six rows, the maximum relative difference between the paired matrix metrics was $0$, the maximum relative error in the nonzero aligned response was $8.721173782511926\allowbreak\times10^{-102}$, and the maximum absolute orthogonal response was $0$. The implementation check summarized in Eq.~\eqref{eq:p2_reproduction_accuracy} reproduces the analytical metric match and the response distinction without changing the construction after observation. The numerical verification validates implementation of this exact example; it does not add an empirical frequency statement. In particular, six amplitudes for one two-dimensional construction are not an operator-family survey, and the zero response in case B follows from exact orthogonality rather than from a general perturbation-screening rule.
+
+\begin{linenomath*}
+\begin{equation}
+\begin{aligned}
+\max \delta_{\mathrm{matched}} &= 0,\\
+\max \delta_{\eta_A} &= 8.721173782511926\times10^{-102},\\
+\max |\eta_B| &= 0.
+\end{aligned}
+\label{eq:p2_reproduction_accuracy}
+\end{equation}
+\end{linenomath*}
+
+Proposition~\ref{prop:p2} is an existence result rather than a frequency statement. The numerical reproduction verifies the implementation of its exact construction; the synthetic-family and finite-element evidence below address separately designed operator sets.
+
+\FloatBarrier
+\section{Coordinate-Transformation Verification}
+\label{sec:coordinate}
+
+\begin{proposition}[Coordinate covariance and redeclaration non-equivalence]
+\label{prop:p3}
+Under $z=D_x\widehat z$ and $\widehat r=D_r^{-1}r$, one fixed
+perturbed operator transforms as
+$\widehat J=D_r^{-1}JD_x$ and
+$\widehat{\Delta J}=D_r^{-1}\Delta JD_x$. A same-numeric perturbation
+redeclared after the coordinate change is generally a different physical
+operator.
+\end{proposition}
+
+Let the physical unknown and scaled unknown be related by the nonsingular matrix $D_x$, and let residual coordinates be transformed by the nonsingular matrix $D_r$. The frozen convention is $z = D_x \widehat z$ and $\widehat r = D_r^{-1} r$. Substitution into $r = Jz-b$ defines the scaled operator and right-hand side as $\widehat J = D_r^{-1} J D_x$ and $\widehat b = D_r^{-1}b$. A perturbation belongs to the same operator relation and must therefore transform as $\widehat{\Delta J} = D_r^{-1} \Delta J D_x$. Equation~\eqref{eq:coordinate_transform} defines equivalent coordinates only when the unknown, residual, right-hand side, operator, and perturbation are transformed together. Applying a transformation to some objects while independently redefining another object creates a different perturbed problem, even if the same numeric symbol is displayed. Scaling and equilibration literature motivates explicit coordinate declarations but does not supply unique physical choices for $D_x$ and $D_r$ \cite{S05,S06,S07,S08}.
+
+\begin{linenomath*}
+\begin{equation}
+\begin{aligned}
+z&=D_x\widehat z, & \widehat r&=D_r^{-1}r,\\
+\widehat J&=D_r^{-1}JD_x, & \widehat b&=D_r^{-1}b,\\
+\widehat{\Delta J}&=D_r^{-1}\Delta J D_x.
+\end{aligned}
+\label{eq:coordinate_transform}
+\end{equation}
+\end{linenomath*}
+
+Suppose first that the perturbation is declared in physical coordinates as $\Delta J_{\mathrm{phys}} = \varepsilon I$. Equation~\eqref{eq:physical_identity_transform} gives its representation in the scaled operator is obtained by the joint transformation, giving $\widehat{\Delta J} = \varepsilon D_r^{-1}D_x$. The transformed perturbation is a scalar identity only when $D_r^{-1}D_x$ is a scalar multiple of the identity, and it retains the same $\varepsilon I$ representation only when $D_x = D_r$. In a mixed-dimensional system, different unknown and residual scales generally make the diagonal entries field dependent. This is a coordinate statement: it identifies the scaled representation of one fixed physical operator. It neither changes that operator nor evaluates the practical consequences of its action. Treating the transformed matrix as if it had to retain the original scalar identity form would replace transformation by redeclaration.
+
+\begin{linenomath*}
+\begin{equation}
+\Delta J_{\mathrm{phys}}=\varepsilon I,
+\qquad \widehat{\Delta J}=\varepsilon D_r^{-1}D_x.
+\label{eq:physical_identity_transform}
+\end{equation}
+\end{linenomath*}
+
+The reverse construction begins with a perturbation declared in scaled coordinates as $\widehat{\Delta J} = \beta I$. Equation~\eqref{eq:scaled_identity_mapping} maps it to physical coordinates and gives $\Delta J_{\mathrm{phys}} = \beta D_r D_x^{-1}$, which is generally a field-dependent diagonal operator. Thus a dimensionless identity guard denotes a family of physical perturbations indexed by the declared unknown and residual scales. The mapping does not select those scales; it only states which physical operator corresponds to the scaled identity after the coordinate contract is fixed. Consequently, the label $\beta I$ is incomplete without the operator space, $D_x$, $D_r$, and the direction in which the transformed solution is interpreted. This distinction also prevents a same-numeric identity written in two coordinate systems from being treated as one perturbation without checking the transformation rule.
+
+Figure~\ref{fig:4} distinguishes equivalent coordinate transformation from same-numeric-label redeclaration.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.98\linewidth,height=0.72\textheight,keepaspectratio]{F4_coordinate_transformation.pdf}
+\caption{Coordinate transformation versus operator redeclaration. Consistent transformation preserves the represented perturbation, whereas reusing a same-numeric identity in scaled coordinates maps back to a different physical perturbation.}
+\label{fig:4}
+\end{figure}
+
+\begin{linenomath*}
+\begin{equation}
+\widehat{\Delta J}=\beta I,
+\qquad \Delta J_{\mathrm{phys}}=\beta D_rD_x^{-1}.
+\label{eq:scaled_identity_mapping}
+\end{equation}
+\end{linenomath*}
+
+The equivalent-transformation calculation used a two-dimensional construction with pre-specified scale factors $1$, $10$, $1\allowbreak\times10^{3}$, and $1\allowbreak\times10^{6}$. In the equivalent transformed-operator route, the unknown, right-hand side, operator, and perturbation were transformed consistently. The resulting maximum relative difference between physical-equivalent perturbation operators was $7.490674676829096\allowbreak\times10^{-102}$, and the relative spread of the physical response was $0$. The check in Eq.~\eqref{eq:p3_reproduction_accuracy} validates the implemented transformation for the frozen construction and pre-specified scales. They do not establish that arbitrary independently specified guards are invariant; invariance here follows because the transformed descriptions represent the same physical operator and the same physical solution response. The numerical values therefore check the algebraic mapping rather than define a coordinate-independent scalar guard.
+
+\begin{linenomath*}
+\begin{equation}
+\begin{aligned}
+\max \delta_{\mathrm{operator}} &= 7.490674676829096\times10^{-102},\\
+\operatorname{spread}(\eta_z)_{\mathrm{transformed}} &= 0.
+\end{aligned}
+\label{eq:p3_reproduction_accuracy}
+\end{equation}
+\end{linenomath*}
+
+The second pre-specified lane reapplied the same numeric identity after changing coordinates instead of transforming the original perturbation. With $D_r=I_2$ and $D_x=\operatorname{diag}(1,s)$, that scaled identity maps back to a physical perturbation whose second diagonal entry is $\varepsilon/s$, whereas the original physical identity retains $\varepsilon$ on both diagonal entries. The two physical perturbations coincide at $s=1$ and differ for every pre-specified $s>1$; the pre-specified inequality check was therefore true. Equation~\eqref{eq:p3_redeclaration_result} demonstrates that a shared numeric label does not establish operator equivalence. It does not show that one of the resulting operators should be selected. The observed response change follows from comparing different physical perturbations, not from a failure of coordinate transformation.
+
+\begin{linenomath*}
+\begin{equation}
+\Delta J_{\mathrm{redeclared}}\neq
+\Delta J_{\mathrm{transformed}}\quad\text{for every pre-specified }s>1.
+\label{eq:p3_redeclaration_result}
+\end{equation}
+\end{linenomath*}
+
+Proposition~\ref{prop:p3} is a covariance requirement, not a scale-selection rule. Equilibration and physical nondimensionalization may pursue different objectives \cite{S07,S08}; the present result requires only that an operator comparison preserve its declared coordinates or explicitly acknowledge a redeclared perturbation.
+
+\FloatBarrier
+\section{Finite-Precision Error-Enclosure Method and Validation}
+\label{sec:error_enclosure}
+
+\input{Paper2_Section5_v0.13.0.tex}
+
+\FloatBarrier
+
+\section{Applications to Two Coupled Finite-Element Linearizations}
+\label{sec:applications}
+
+\subsection{Archived operator snapshots and reference construction}
+
+The application stage uses two independently archived transformed free-system snapshots from a four-field displacement--pressure--saturation discretization. M8 contains 324 total nodal degrees of freedom and 196 free unknowns; M16 contains 1156 and 900, respectively. The free ordering retains 49 and 225 coordinates for each of $u_x$, $u_y$, $p$, and $S$. Unknown scales are $10^{-5}$ for both displacement components, $10^7$ for pressure, and $10^{-1}$ for saturation. Table~\ref{tab:feprovenance} records the corresponding matrix sizes and sparsity.
+
+\begin{table}[htbp]
+\centering
+\footnotesize
+\caption{Provenance and coordinate content of the archived finite-element tangents. Each per-field count applies to $u_x$, $u_y$, $p$, and $S$.}
+\label{tab:feprovenance}
+\input{T5_FE_provenance_v0.13.0.tex}
+\end{table}
+
+Each snapshot fixes the IEEE binary64 matrices $J$ and $A$, common right-hand side $b$, free-degree-of-freedom ordering, unknown and residual scales, and Euclidean comparison norm before either route is evaluated. The realized perturbation $E=A-J$ is diagonal in both cases. M8 and M16 are independently captured states rather than a controlled mesh or condition sequence.
+
+For each case, the reference problem is the real-valued system represented exactly by the captured binary64 operands. Integer-ratio reconstruction, signed-zero checks, and the elementwise identity $A=J+E$ establish that operand contract. Parent systems and the response equation are solved independently at 120 and 180 decimal digits. Each observed response is compared only with the error enclosure for its own operation graph.
+
+\subsection{Case results and offline cost}
+
+For M8, the maximum normalized 120/180-digit difference is $8.81\times10^{-121}$ and the maximum reference relative residual is $2.55\times10^{-124}$. Direct subtraction gives $d_{\mathrm{obs}}=2.919\times10^{-12}$ with $U=5.880\times10^{-13}$; the response equation gives $d_{\mathrm{obs}}=2.920\times10^{-12}$ with $U=2.588\times10^{-22}$. Both intervals lie above the special threshold $\tau=0$.
+
+For M16, the maximum normalized precision difference is $3.97\times10^{-121}$ and the maximum reference relative residual is $4.14\times10^{-124}$. Direct subtraction gives $d_{\mathrm{obs}}=2.463\times10^{-11}$ with $U=3.971\times10^{-12}$; the response equation gives $d_{\mathrm{obs}}=2.464\times10^{-11}$ with $U=6.930\times10^{-21}$. Again, both route-specific intervals lie above $\tau=0$. Rounded route, precision, and component summaries appear in Supplementary Tables~S6--S8; exact decimal strings remain in the machine-readable ledgers.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.98\linewidth,height=0.72\textheight,keepaspectratio]{F8_two_operator_route_qualification.pdf}
+\caption{Route-specific response intervals for two independently archived coupled finite-element tangents. The left panels show matrix sparsity; the right panels show direct-difference and response-equation intervals on case-specific scales. Dashed references denote $\tau=0$.}
+\label{fig:8}
+\end{figure}
+
+\begin{table}[htbp]
+\centering
+\footnotesize
+\caption{Route-specific response intervals for the two finite-element tangents at $\tau=0$. Displayed values are rounded; Supplementary Table~S4 retains exact strings.}
+\label{tab:3}
+\input{T3_two_operator_route_qualification.tex}
+\end{table}
+
+The complete M8 reference calculation, including both precision levels and an independent repeat, required approximately 468~s and 110~MiB of peak memory. M16 required 10.4~h and 1.35~GiB. These measurements define the implementation as a reproducible reference benchmark against which scalable estimators can be tested; two timings do not constitute a complexity fit.
+
+\FloatBarrier
+\section{Discussion}
+
+\input{Paper2_Discussion_v0.13.0.tex}
+
+\FloatBarrier
+
+\section{Conclusions}
+
+\input{Paper2_Conclusions_v0.13.0.tex}
+
+\section*{Data availability}
+The non-confidential frozen operands, synthetic validation records, exact-value tables, claim--evidence matrix, and provenance files supporting this study are archived in Zenodo at \href{https://doi.org/10.5281/zenodo.21833850}{https://doi.org/10.5281/zenodo.21833850} \cite{liang2026artifact}. This concept DOI resolves to the latest published artifact version. The archive excludes Abaqus executables, user-element source, solver state histories, and engineering project data.
+
+\section*{Code availability}
+The scripts for the analytical constructions, finite-precision error-enclosure validation, and the two reference finite-element linearization applications are available at \href{https://github.com/yqma7980/scale-explicit-matrix-perturbation-observability}{https://github.com/yqma7980/scale-explicit-matrix-perturbation-observability} and are preserved with the cited Zenodo release. Code is licensed under the MIT License; data and documentation are licensed under CC BY 4.0.
+
+\section*{Reproducibility statement}
+The reported calculations use immutable operand snapshots, explicit coordinates and reference problems, two independent precision levels, independent-process repeatability checks, and exact output records. The Supplementary Information retains full numerical precision, error-enclosure components, and execution provenance.
+
+\section*{CRediT authorship contribution statement}
+\textbf{Bing Liang:} Conceptualization, Methodology, Formal analysis, Writing -- original draft, Writing -- review and editing, Supervision. \textbf{Yangqi Ma:} Methodology, Software, Validation, Formal analysis, Investigation, Data curation, Visualization, Writing -- original draft, Writing -- review and editing. \textbf{Weiji Sun:} Conceptualization, Methodology, Resources, Supervision, Project administration, Funding acquisition, Writing -- review and editing. \textbf{Shi He:} Methodology, Validation, Writing -- review and editing.
+
+\section*{Funding}
+This work was supported by the National Natural Science Foundation of China (General Program, Grant No. 52474038, awarded to Weiji Sun).
+
+\section*{Declaration of competing interest}
+The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
+
+\section*{Declaration of generative AI and AI-assisted technologies in the manuscript preparation process}
+During preparation of this work, the authors used Codex (OpenAI desktop version 26.730.8199.0; Codex CLI version 0.145.0) to assist with organizing and formatting the LaTeX manuscript source. After using this tool, the authors reviewed and edited the manuscript as needed and take full responsibility for the content of the publication.
+
+\bibliographystyle{elsarticle-num}
+\bibliography{Paper2_references_v0.13.0}
+
+\end{document}

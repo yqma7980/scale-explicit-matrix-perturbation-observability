@@ -1,0 +1,19 @@
+{
+  "finite_count": 300,
+  "legacy_checked": false,
+  "legacy_row_count": 0,
+  "mismatch_count": 0,
+  "mismatches": [],
+  "response_matches_legacy_delta_stable": false,
+  "row_count": 300,
+  "schema_version": "1.0",
+  "shared_fields": [
+    "J_binary_hex",
+    "DeltaJ_binary_hex",
+    "A_guarded_binary_hex",
+    "b_binary_hex",
+    "z_tilde_hex",
+    "zg_tilde_hex",
+    "delta_direct_hex"
+  ]
+}

@@ -1,0 +1,220 @@
+\begin{thebibliography}{10}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\expandafter\ifx\csname href\endcsname\relax
+  \def\href#1#2{#2} \def\path#1{#1}\fi
+
+\bibitem{S32}
+J.~C. Simo, R.~L. Taylor, Consistent tangent operators for rate-independent
+  elastoplasticity, Computer Methods in Applied Mechanics and Engineering
+  48~(1) (1985) 101--118.
+\newblock \href {https://doi.org/10.1016/0045-7825(85)90070-2}
+  {\path{doi:10.1016/0045-7825(85)90070-2}}.
+
+\bibitem{S21}
+R.~S. Dembo, S.~C. Eisenstat, T.~Steihaug, Inexact newton methods, SIAM Journal
+  on Numerical Analysis 19~(2) (1982) 400--408.
+\newblock \href {https://doi.org/10.1137/0719025} {\path{doi:10.1137/0719025}}.
+
+\bibitem{S29}
+Z.~Zhou, S.~Keller, Improving convergence by optimizing the condition number of
+  the stiffness matrices arising from least-squares finite element methods,
+  Computer Methods in Applied Mechanics and Engineering 385 (2021) 114023.
+\newblock \href {https://doi.org/10.1016/j.cma.2021.114023}
+  {\path{doi:10.1016/j.cma.2021.114023}}.
+
+\bibitem{S30}
+A.~Kopani{\v{c}}{\'a}kov{\'a}, H.~Kothari, R.~Krause, Nonlinear field-split
+  preconditioners for solving monolithic phase-field models of brittle
+  fracture, Computer Methods in Applied Mechanics and Engineering 403 (2023)
+  115733.
+\newblock \href {https://doi.org/10.1016/j.cma.2022.115733}
+  {\path{doi:10.1016/j.cma.2022.115733}}.
+
+\bibitem{S31}
+{\`A}.~Alsalti-Baldellou, A.~Franceschini, G.~Mazzucco, C.~Janna, Efficient
+  {AMG} reduction-based preconditioners for structural mechanics, Computer
+  Methods in Applied Mechanics and Engineering 431 (2024) 117249.
+\newblock \href {https://doi.org/10.1016/j.cma.2024.117249}
+  {\path{doi:10.1016/j.cma.2024.117249}}.
+
+\bibitem{S33}
+S.~C. Eisenstat, H.~F. Walker, Choosing the forcing terms in an inexact newton
+  method, SIAM Journal on Scientific Computing 17~(1) (1996) 16--32.
+\newblock \href {https://doi.org/10.1137/0917003} {\path{doi:10.1137/0917003}}.
+
+\bibitem{S34}
+C.~T. Kelley, D.~E. Keyes, Convergence analysis of pseudo-transient
+  continuation, SIAM Journal on Numerical Analysis 35~(2) (1998) 508--523.
+\newblock \href {https://doi.org/10.1137/S0036142996304796}
+  {\path{doi:10.1137/S0036142996304796}}.
+
+\bibitem{S36}
+M.~Benzi, Preconditioning techniques for large linear systems: A survey,
+  Journal of Computational Physics 182~(2) (2002) 418--477.
+\newblock \href {https://doi.org/10.1006/jcph.2002.7176}
+  {\path{doi:10.1006/jcph.2002.7176}}.
+
+\bibitem{S01}
+J.~R. Rice, A theory of condition, SIAM Journal on Numerical Analysis 3~(2)
+  (1966) 287--310.
+\newblock \href {https://doi.org/10.1137/0703023} {\path{doi:10.1137/0703023}}.
+
+\bibitem{S02}
+G.~W. Stewart, J.-g. Sun, Matrix Perturbation Theory, 1st Edition, Elsevier,
+  1990.
+
+\bibitem{S03}
+N.~J. Higham, Accuracy and Stability of Numerical Algorithms, 2nd Edition,
+  no.~80 in Other Titles in Applied Mathematics, Society for Industrial and
+  Applied Mathematics, 2002.
+\newblock \href {https://doi.org/10.1137/1.9780898718027}
+  {\path{doi:10.1137/1.9780898718027}}.
+
+\bibitem{S05}
+A.~van~der Sluis, Condition numbers and equilibration of matrices, Numerische
+  Mathematik 14 (1969) 14--23.
+\newblock \href {https://doi.org/10.1007/BF02165096}
+  {\path{doi:10.1007/BF02165096}}.
+
+\bibitem{S06}
+R.~D. Skeel, Scaling for numerical stability in gaussian elimination, Journal
+  of the ACM 26~(3) (1979) 494--526.
+\newblock \href {https://doi.org/10.1145/322139.322148}
+  {\path{doi:10.1145/322139.322148}}.
+
+\bibitem{S07}
+D.~Ruiz, A scaling algorithm to equilibrate both rows and columns norms in
+  matrices, Tech. Rep. RAL-TR-2001-034, Rutherford Appleton Laboratory (2001).
+
+\bibitem{S08}
+P.~A. Knight, D.~Ruiz, B.~U{\c{c}}ar, A symmetry preserving algorithm for
+  matrix scaling, SIAM Journal on Matrix Analysis and Applications 35~(3)
+  (2014) 931--955.
+\newblock \href {https://doi.org/10.1137/110825753}
+  {\path{doi:10.1137/110825753}}.
+
+\bibitem{S11}
+M.~Arioli, J.~W. Demmel, I.~S. Duff, Solving sparse linear systems with sparse
+  backward error, SIAM Journal on Matrix Analysis and Applications 10~(2)
+  (1989) 165--190.
+\newblock \href {https://doi.org/10.1137/0610013} {\path{doi:10.1137/0610013}}.
+
+\bibitem{S12}
+S.~M. Rump, Verification methods: Rigorous results using floating-point
+  arithmetic, Acta Numerica 19 (2010) 287--449.
+\newblock \href {https://doi.org/10.1017/S096249291000005X}
+  {\path{doi:10.1017/S096249291000005X}}.
+
+\bibitem{S13}
+T.~Ogita, S.~M. Rump, S.~Oishi, Accurate sum and dot product, SIAM Journal on
+  Scientific Computing 26~(6) (2005) 1955--1988.
+\newblock \href {https://doi.org/10.1137/030601818}
+  {\path{doi:10.1137/030601818}}.
+
+\bibitem{S26}
+N.~J. Higham, F.~Tisseur, A block algorithm for matrix 1-norm estimation, with
+  an application to 1-norm pseudospectra, SIAM Journal on Matrix Analysis and
+  Applications 21~(4) (2000) 1185--1201.
+\newblock \href {https://doi.org/10.1137/S0895479899356080}
+  {\path{doi:10.1137/S0895479899356080}}.
+
+\bibitem{S28}
+E.~Carson, N.~J. Higham, A new analysis of iterative refinement and its
+  application to accurate solution of ill-conditioned sparse linear systems,
+  SIAM Journal on Scientific Computing 39~(6) (2017) A2834--A2856.
+\newblock \href {https://doi.org/10.1137/17M1122918}
+  {\path{doi:10.1137/17M1122918}}.
+
+\bibitem{S35}
+W.~W. Hager, Condition estimates, SIAM Journal on Scientific and Statistical
+  Computing 5~(2) (1984) 311--316.
+\newblock \href {https://doi.org/10.1137/0905023} {\path{doi:10.1137/0905023}}.
+
+\bibitem{S37}
+E.~Carson, N.~J. Higham, Accelerating the solution of linear systems by
+  iterative refinement in three precisions, SIAM Journal on Scientific
+  Computing 40~(2) (2018) A817--A847.
+\newblock \href {https://doi.org/10.1137/17M1140819}
+  {\path{doi:10.1137/17M1140819}}.
+
+\bibitem{S38}
+N.~J. Higham, T.~Mary, Mixed precision algorithms in numerical linear algebra,
+  Acta Numerica 31 (2022) 347--414.
+\newblock \href {https://doi.org/10.1017/S0962492922000022}
+  {\path{doi:10.1017/S0962492922000022}}.
+
+\bibitem{S39}
+D.~J. Higham, N.~J. Higham, Backward error and condition of structured linear
+  systems, SIAM Journal on Matrix Analysis and Applications 13~(1) (1992)
+  162--175.
+\newblock \href {https://doi.org/10.1137/0613014} {\path{doi:10.1137/0613014}}.
+
+\bibitem{S40}
+S.~Chandrasekaran, I.~C.~F. Ipsen, On the sensitivity of solution components in
+  linear systems of equations, SIAM Journal on Matrix Analysis and Applications
+  16~(1) (1995) 93--112.
+\newblock \href {https://doi.org/10.1137/S0895479892231255}
+  {\path{doi:10.1137/S0895479892231255}}.
+
+\bibitem{S41}
+S.~M. Rump, Structured perturbations part {II}: Componentwise distances, SIAM
+  Journal on Matrix Analysis and Applications 25~(1) (2003) 31--56.
+\newblock \href {https://doi.org/10.1137/S0895479802405744}
+  {\path{doi:10.1137/S0895479802405744}}.
+
+\bibitem{S42}
+S.~M. Rump, Verified bounds for least squares problems and underdetermined
+  linear systems, SIAM Journal on Matrix Analysis and Applications 33~(1)
+  (2012) 130--148.
+\newblock \href {https://doi.org/10.1137/110840248}
+  {\path{doi:10.1137/110840248}}.
+
+\bibitem{S43}
+S.~M. Rump, Computable backward error bounds for basic algorithms in linear
+  algebra, Nonlinear Theory and Its Applications, IEICE 6~(3) (2015) 360--363.
+\newblock \href {https://doi.org/10.1587/nolta.6.360}
+  {\path{doi:10.1587/nolta.6.360}}.
+
+\bibitem{S17}
+F.~Brezzi, On the existence, uniqueness and approximation of saddle-point
+  problems arising from lagrangian multipliers, Revue fran{\c{c}}aise
+  d'automatique, informatique, recherche op{\'e}rationnelle. Analyse
+  num{\'e}rique 8~(R2) (1974) 129--151.
+
+\bibitem{S20}
+M.~Benzi, G.~H. Golub, J.~Liesen, Numerical solution of saddle point problems,
+  Acta Numerica 14 (2005) 1--137.
+\newblock \href {https://doi.org/10.1017/S0962492904000212}
+  {\path{doi:10.1017/S0962492904000212}}.
+
+\bibitem{S23}
+P.~Deuflhard, Newton Methods for Nonlinear Problems: Affine Invariance and
+  Adaptive Algorithms, 1st Edition, Vol.~35 of Springer Series in Computational
+  Mathematics, Springer Berlin, Heidelberg, 2011.
+\newblock \href {https://doi.org/10.1007/978-3-642-23899-4}
+  {\path{doi:10.1007/978-3-642-23899-4}}.
+
+\bibitem{S09}
+{IEEE}, {IEEE Standard for Floating-Point Arithmetic}, IEEE Std 754-2019
+  (2019).
+\newblock \href {https://doi.org/10.1109/IEEESTD.2019.8766229}
+  {\path{doi:10.1109/IEEESTD.2019.8766229}}.
+
+\bibitem{S10}
+D.~Goldberg, What every computer scientist should know about floating-point
+  arithmetic, ACM Computing Surveys 23~(1) (1991) 5--48.
+\newblock \href {https://doi.org/10.1145/103162.103163}
+  {\path{doi:10.1145/103162.103163}}.
+
+\bibitem{liang2026artifact}
+B.~Liang, Y.~Ma, W.~Sun, S.~He,
+  \href{https://doi.org/10.5281/zenodo.21833850}{Route-specific
+  finite-precision qualification of tangent perturbations: reproducibility
+  artifact}, software and data (2026).
+\newblock \href {https://doi.org/10.5281/zenodo.21833850}
+  {\path{doi:10.5281/zenodo.21833850}}.
+\newline\urlprefix\url{https://doi.org/10.5281/zenodo.21833850}
+
+\end{thebibliography}

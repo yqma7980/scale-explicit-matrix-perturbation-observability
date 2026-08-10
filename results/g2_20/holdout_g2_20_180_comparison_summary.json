@@ -1,0 +1,28 @@
+{
+  "by_lane": {
+    "BINARY64_OPERAND": {
+      "component_failure_count": 0,
+      "direct_coverage_count": 300,
+      "nonfinite_count": 0,
+      "response_coverage_count": 300,
+      "rows": 300
+    },
+    "DECIMAL_SOURCE": {
+      "component_failure_count": 0,
+      "direct_coverage_count": 300,
+      "nonfinite_count": 0,
+      "response_coverage_count": 300,
+      "rows": 300
+    }
+  },
+  "dataset": "HOLDOUT_G2_20",
+  "maximum_reference_relative_residual": "9.9577885485408303035494635527085735066997586685352778822619462233651686103250841339550200258404933451769562842446926131661851531598134794278142232085748035033481124698728e-189",
+  "output_row_count": 600,
+  "precision_digits": 180,
+  "response_lower_error_counts": {
+    "DIRECT_OR_TIE": 169,
+    "RESPONSE": 431
+  },
+  "schema_version": "1.0",
+  "system_count": 300
+}
